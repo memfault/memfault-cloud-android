@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h2>MemfaultCloud Android</h2>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-chunk-queue/index.html">com.memfault.cloud.sdk.ChunkQueue</a></h5>
+<p>An API that allows a <a href="../com.memfault.cloud.sdk/-memfault-chunk-sender/index.html">MemfaultChunkSender</a> to queue chunks into batched requests.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-get-latest-release-callback/index.html">com.memfault.cloud.sdk.GetLatestReleaseCallback</a></h5>
+<p>Receive the result of <a href="../com.memfault.cloud.sdk/-memfault-api/get-latest-release.html">MemfaultApi.getLatestRelease</a>.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-memfault-api/index.html">com.memfault.cloud.sdk.MemfaultApi</a></h5>
+<p>The Memfault SDK entrypoint.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-memfault-chunk-sender/index.html">com.memfault.cloud.sdk.MemfaultChunkSender</a></h5>
+<p>An API for sending chunks for a given device to Memfault's web services.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-memfault-device-info/index.html">com.memfault.cloud.sdk.MemfaultDeviceInfo</a></h5>
+<p>Information describing a device.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-memfault-ota-package/index.html">com.memfault.cloud.sdk.MemfaultOtaPackage</a></h5>
+<p>An OTA package, returned by Memfault's server for a specific <a href="../com.memfault.cloud.sdk/-memfault-device-info/index.html">MemfaultDeviceInfo</a>.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-post-chunks-callback/index.html">com.memfault.cloud.sdk.PostChunksCallback</a></h5>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

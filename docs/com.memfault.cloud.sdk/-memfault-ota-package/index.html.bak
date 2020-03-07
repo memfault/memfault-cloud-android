@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MemfaultOtaPackage - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="./index.html">MemfaultOtaPackage</a><br/>
+<br/>
+<h1>MemfaultOtaPackage</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">MemfaultOtaPackage</span></code>
+<p>An OTA package, returned by Memfault's server for a specific <a href="../-memfault-device-info/index.html">MemfaultDeviceInfo</a>.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>An OTA package, returned by Memfault's server for a specific <a href="../-memfault-device-info/index.html">MemfaultDeviceInfo</a>.</p>
+<code><span class="identifier">MemfaultOtaPackage</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String)/releaseNotes">releaseNotes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String)/appVersion">appVersion</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="app-version.html">appVersion</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">appVersion</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="location.html">location</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">location</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="release-notes.html">releaseNotes</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">releaseNotes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

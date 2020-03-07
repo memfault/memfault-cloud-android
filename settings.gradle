@@ -1,0 +1,3 @@
+rootProject.name='Android Cloud SDK'
+include ':sample'
+include ':sdk'

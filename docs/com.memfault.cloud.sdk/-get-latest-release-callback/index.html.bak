@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GetLatestReleaseCallback - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="./index.html">GetLatestReleaseCallback</a><br/>
+<br/>
+<h1>GetLatestReleaseCallback</h1>
+<code><span class="keyword">interface </span><span class="identifier">GetLatestReleaseCallback</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Callback</span></code>
+<p>Receive the result of <a href="../-memfault-api/get-latest-release.html">MemfaultApi.getLatestRelease</a>.</p>
+<p>All methods are run on the main thread. Only one method will be called.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="on-error.html">onError</a></h4>
+</td>
+<td>
+<p>Called when the latest release could not be determined.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.GetLatestReleaseCallback$onError(java.lang.Exception)/e">e</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-update-available.html">onUpdateAvailable</a></h4>
+</td>
+<td>
+<p>Called when an update is available for the given device.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onUpdateAvailable</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.GetLatestReleaseCallback$onUpdateAvailable(com.memfault.cloud.sdk.MemfaultOtaPackage)/otaPackage">otaPackage</span><span class="symbol">:</span>&nbsp;<a href="../-memfault-ota-package/index.html"><span class="identifier">MemfaultOtaPackage</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-up-to-date.html">onUpToDate</a></h4>
+</td>
+<td>
+<p>Called when the device is up to date.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onUpToDate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

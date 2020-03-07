@@ -1,0 +1,17 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MemfaultChunkSender.Builder.setMemfaultApi - sdk</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="../index.html">MemfaultChunkSender</a>&nbsp;/&nbsp;<a href="index.html">Builder</a>&nbsp;/&nbsp;<a href="./set-memfault-api.html">setMemfaultApi</a><br/>
+<br/>
+<h1>setMemfaultApi</h1>
+<a name="com.memfault.cloud.sdk.MemfaultChunkSender.Builder$setMemfaultApi(com.memfault.cloud.sdk.MemfaultApi)"></a>
+<code><span class="keyword">fun </span><span class="identifier">setMemfaultApi</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultChunkSender.Builder$setMemfaultApi(com.memfault.cloud.sdk.MemfaultApi)/memfaultApi">memfaultApi</span><span class="symbol">:</span>&nbsp;<a href="../../-memfault-api/index.html"><span class="identifier">MemfaultApi</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Builder</span></code>
+<p>Provide an active instance of the API to the <a href="../index.html">MemfaultChunkSender</a>.</p>
+<p>You only need to create one <a href="../../-memfault-api/index.html">MemfaultApi</a>; the same instance can be passed into several
+instances of <a href="../index.html">MemfaultChunkSender</a>.</p>
+</BODY>
+</HTML>

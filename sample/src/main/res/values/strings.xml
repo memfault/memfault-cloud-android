@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Android Cloud SDK</string>
+    <string name="get_latest_release">Get Latest Release</string>
+    <string name="post_chunks">Post Chunks</string>
+</resources>

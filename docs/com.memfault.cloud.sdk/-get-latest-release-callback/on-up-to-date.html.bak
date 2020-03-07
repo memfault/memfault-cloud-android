@@ -1,0 +1,15 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GetLatestReleaseCallback.onUpToDate - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">GetLatestReleaseCallback</a>&nbsp;/&nbsp;<a href="./on-up-to-date.html">onUpToDate</a><br/>
+<br/>
+<h1>onUpToDate</h1>
+<a name="com.memfault.cloud.sdk.GetLatestReleaseCallback$onUpToDate()"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onUpToDate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called when the device is up to date.</p>
+</BODY>
+</HTML>

@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MemfaultChunkSender.postChunks - sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">MemfaultChunkSender</a>&nbsp;/&nbsp;<a href="./post-chunks.html">postChunks</a><br/>
+<br/>
+<h1>postChunks</h1>
+<a name="com.memfault.cloud.sdk.MemfaultChunkSender$postChunks(kotlin.collections.List((kotlin.ByteArray)), com.memfault.cloud.sdk.PostChunksCallback)"></a>
+<code><span class="keyword">fun </span><span class="identifier">postChunks</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultChunkSender$postChunks(kotlin.collections.List((kotlin.ByteArray)), com.memfault.cloud.sdk.PostChunksCallback)/chunks">chunks</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultChunkSender$postChunks(kotlin.collections.List((kotlin.ByteArray)), com.memfault.cloud.sdk.PostChunksCallback)/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-post-chunks-callback/index.html"><span class="identifier">PostChunksCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Enqueue the chunks and and attempt to drain all chunks for the given device.</p>
+<p>Calling this method with an empty list of chunks will trigger a request to the server
+that contains chunks from the device that are still enqueued.</p>
+<h3>Parameters</h3>
+<p><a name="chunks"></a>
+<code>chunks</code> - the chunks to be enqueued and sent to the server.</p>
+<p><a name="callback"></a>
+<code>callback</code> - called when there is no more data to send or a request fails.</p>
+</BODY>
+</HTML>

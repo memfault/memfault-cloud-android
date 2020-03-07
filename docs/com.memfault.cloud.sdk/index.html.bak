@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.memfault.cloud.sdk - sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">sdk</a>&nbsp;/&nbsp;<a href="./index.html">com.memfault.cloud.sdk</a><br/>
+<br/>
+<h2>Package com.memfault.cloud.sdk</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-chunk-queue/index.html">ChunkQueue</a></h4>
+</td>
+<td>
+<p>An API that allows a <a href="-memfault-chunk-sender/index.html">MemfaultChunkSender</a> to queue chunks into batched requests.</p>
+<code><span class="keyword">interface </span><span class="identifier">ChunkQueue</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-get-latest-release-callback/index.html">GetLatestReleaseCallback</a></h4>
+</td>
+<td>
+<p>Receive the result of <a href="-memfault-api/get-latest-release.html">MemfaultApi.getLatestRelease</a>.</p>
+<code><span class="keyword">interface </span><span class="identifier">GetLatestReleaseCallback</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Callback</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-memfault-api/index.html">MemfaultApi</a></h4>
+</td>
+<td>
+<p>The Memfault SDK entrypoint.</p>
+<code><span class="keyword">class </span><span class="identifier">MemfaultApi</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-memfault-chunk-sender/index.html">MemfaultChunkSender</a></h4>
+</td>
+<td>
+<p>An API for sending chunks for a given device to Memfault's web services.</p>
+<code><span class="keyword">class </span><span class="identifier">MemfaultChunkSender</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-memfault-device-info/index.html">MemfaultDeviceInfo</a></h4>
+</td>
+<td>
+<p>Information describing a device.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">MemfaultDeviceInfo</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-memfault-ota-package/index.html">MemfaultOtaPackage</a></h4>
+</td>
+<td>
+<p>An OTA package, returned by Memfault's server for a specific <a href="-memfault-device-info/index.html">MemfaultDeviceInfo</a>.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">MemfaultOtaPackage</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-post-chunks-callback/index.html">PostChunksCallback</a></h4>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">PostChunksCallback</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Callback</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

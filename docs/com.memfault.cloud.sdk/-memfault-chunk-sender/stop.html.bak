@@ -1,0 +1,16 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MemfaultChunkSender.stop - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">MemfaultChunkSender</a>&nbsp;/&nbsp;<a href="./stop.html">stop</a><br/>
+<br/>
+<h1>stop</h1>
+<a name="com.memfault.cloud.sdk.MemfaultChunkSender$stop()"></a>
+<code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Stop sending chunks for this device. You must call <a href="./stop.html">stop</a> before <a href="../-memfault-api/deinit.html">MemfaultApi.deinit</a>.</p>
+<p>If the default <a href="../-chunk-queue/index.html">ChunkQueue</a> implementation is used, it will be cleared.</p>
+</BODY>
+</HTML>

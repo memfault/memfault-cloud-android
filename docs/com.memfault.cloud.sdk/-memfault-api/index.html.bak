@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MemfaultApi - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="./index.html">MemfaultApi</a><br/>
+<br/>
+<h1>MemfaultApi</h1>
+<code><span class="keyword">class </span><span class="identifier">MemfaultApi</span></code>
+<p>The Memfault SDK entrypoint.</p>
+<h2>Initialization</h2>
+<p>We recommend creating only one instance of <a href="./index.html">MemfaultApi</a> and using it across your entire application. Use the <a href="-builder/index.html">Builder</a>
+to create an instance.</p>
+<p>Kotlin:</p>
+<pre><code class="lang-kotlin">val memfault = Memfault.Builder()
+  .setMinLogLevel(Memfault.LogLevel.INFO)
+  .setContext(appContext)
+  .setApiKey(PROJECT_API_KEY)
+  .build()
+</code></pre>
+<p>Java:</p>
+<pre><code class="lang-java">final Memfault memfault = new Memfault.Builder()
+   .setMinLogLevel(Memfault.LogLevel.INFO)
+   .setContext(appContext)
+   .setApiKey(PROJECT_API_KEY)
+   .build();
+</code></pre>
+<p>To find your <code>PROJECT_API_KEY</code>, log in to <a href="https://app.memfault.com/">https://app.memfault.com/</a> and navigate to Settings.</p>
+<h2>Getting the Latest Release</h2>
+<p>You can check to see whether there's a new update for a particular device with
+<a href="get-latest-release.html">MemfaultApi.getLatestRelease</a>:</p>
+<p>Kotlin:</p>
+<pre><code class="lang-kotlin">memfaultApi.getLatestRelease(deviceInfo, callback = object : GetLatestReleaseCallback {
+
+  override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) {
+    // There's a new software package
+  }
+
+  override fun onUpToDate() {
+    // Device is up to date, nothing to do!
+  }
+
+  override fun onError(e: Exception) {
+    // There was an error; handle it here
+  }
+})
+</code></pre>
+<p>Java:</p>
+<pre><code class="lang-java">final GetLatestReleaseCallback callback = new GetLatestReleaseCallback() {
+  @Override
+  public void onUpdateAvailable(@NonNull MemfaultOtaPackage otaPackage) {
+    // There's a new software package
+  }
+
+  @Override
+  public void onUpToDate() {
+    // Device is up to date, nothing to do!
+  }
+
+  @Override
+  public void onError(@NonNull Exception e) {
+    // There was an error; handle it here
+  }
+};
+memfaultApi.getLatestRelease(callback);
+</code></pre>
+<h2>Permissions</h2>
+<p>The SDK requires several permissions in order to implement all functionality. Callers should check for these permissions and,
+if necessary, <a href="https://developer.android.com/training/permissions/requesting">request them</a> from the user.</p>
+<ul><li><a href="https://developer.android.com/training/basics/network-ops/connecting.html">Network</a>: <a href="https://developer.android.com/reference/android/Manifest.permission.html#INTERNET"><code>INTERNET</code></a>; <a href="https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_NETWORK_STATE"><code>ACCESS_NETWORK_STATE</code></a></li>
+</ul>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-builder/index.html">Builder</a></h4>
+</td>
+<td>
+<p>Build a new <a href="./index.html">MemfaultApi</a> instance.</p>
+<code><span class="keyword">class </span><span class="identifier">Builder</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-log-level/index.html">LogLevel</a></h4>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">LogLevel</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="deinit.html">deinit</a></h4>
+</td>
+<td>
+<p>Stop and clean up any active tasks.</p>
+<code><span class="keyword">fun </span><span class="identifier">deinit</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-latest-release.html">getLatestRelease</a></h4>
+</td>
+<td>
+<p>Queries Memfault's services to find if a new update is available.</p>
+<code><span class="keyword">fun </span><span class="identifier">getLatestRelease</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultApi$getLatestRelease(com.memfault.cloud.sdk.MemfaultDeviceInfo, com.memfault.cloud.sdk.GetLatestReleaseCallback)/deviceInfo">deviceInfo</span><span class="symbol">:</span>&nbsp;<a href="../-memfault-device-info/index.html"><span class="identifier">MemfaultDeviceInfo</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultApi$getLatestRelease(com.memfault.cloud.sdk.MemfaultDeviceInfo, com.memfault.cloud.sdk.GetLatestReleaseCallback)/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-get-latest-release-callback/index.html"><span class="identifier">GetLatestReleaseCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
