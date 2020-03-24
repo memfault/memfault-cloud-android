@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileSdk
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.memfault.cloud.sample"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.compileSdkVersion
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
         versionCode 1
         versionName "1.0"
 
@@ -26,14 +26,14 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.kotlinStdlib
-    implementation rootProject.ext.appCompat
-    implementation rootProject.ext.coreKtx
-    implementation rootProject.ext.constraintLayout
-    implementation rootProject.ext.lifecycleExtensions
-    implementation rootProject.ext.viewmodelKtx
+    implementation deps.kotlin.stdlib
+    implementation deps.android.appCompat
+    implementation deps.android.coreKtx
+    implementation deps.android.constraintLayout
+    implementation deps.android.lifecycleExtensions
+    implementation deps.android.viewmodelKtx
 
     implementation project(path: ':sdk')
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+    debugImplementation deps.leakCanary
 }

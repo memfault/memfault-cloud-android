@@ -11,19 +11,19 @@
 <tbody>
 <tr>
 <h5><a href="../com.memfault.cloud.sdk/-chunk-queue/index.html">com.memfault.cloud.sdk.ChunkQueue</a></h5>
-<p>An API that allows a <a href="../com.memfault.cloud.sdk/-memfault-chunk-sender/index.html">MemfaultChunkSender</a> to queue chunks into batched requests.</p>
+<p>An API that allows a <a href="../com.memfault.cloud.sdk/-chunk-sender/index.html">ChunkSender</a> to queue chunks into batched requests.</p>
+</tr>
+<tr>
+<h5><a href="../com.memfault.cloud.sdk/-chunk-sender/index.html">com.memfault.cloud.sdk.ChunkSender</a></h5>
+<p>Send chunks for a given device to Memfault's web services.</p>
 </tr>
 <tr>
 <h5><a href="../com.memfault.cloud.sdk/-get-latest-release-callback/index.html">com.memfault.cloud.sdk.GetLatestReleaseCallback</a></h5>
-<p>Receive the result of <a href="../com.memfault.cloud.sdk/-memfault-api/get-latest-release.html">MemfaultApi.getLatestRelease</a>.</p>
+<p>Receive the result of <a href="../com.memfault.cloud.sdk/-memfault-cloud/get-latest-release.html">MemfaultCloud.getLatestRelease</a>.</p>
 </tr>
 <tr>
-<h5><a href="../com.memfault.cloud.sdk/-memfault-api/index.html">com.memfault.cloud.sdk.MemfaultApi</a></h5>
+<h5><a href="../com.memfault.cloud.sdk/-memfault-cloud/index.html">com.memfault.cloud.sdk.MemfaultCloud</a></h5>
 <p>The Memfault SDK entrypoint.</p>
-</tr>
-<tr>
-<h5><a href="../com.memfault.cloud.sdk/-memfault-chunk-sender/index.html">com.memfault.cloud.sdk.MemfaultChunkSender</a></h5>
-<p>An API for sending chunks for a given device to Memfault's web services.</p>
 </tr>
 <tr>
 <h5><a href="../com.memfault.cloud.sdk/-memfault-device-info/index.html">com.memfault.cloud.sdk.MemfaultDeviceInfo</a></h5>
@@ -34,7 +34,8 @@
 <p>An OTA package, returned by Memfault's server for a specific <a href="../com.memfault.cloud.sdk/-memfault-device-info/index.html">MemfaultDeviceInfo</a>.</p>
 </tr>
 <tr>
-<h5><a href="../com.memfault.cloud.sdk/-post-chunks-callback/index.html">com.memfault.cloud.sdk.PostChunksCallback</a></h5>
+<h5><a href="../com.memfault.cloud.sdk/-send-chunks-callback/index.html">com.memfault.cloud.sdk.SendChunksCallback</a></h5>
+<p>A callback for <a href="../com.memfault.cloud.sdk/-chunk-sender/send.html">ChunkSender.send</a>.</p>
 </tr>
 </tbody>
 </table>

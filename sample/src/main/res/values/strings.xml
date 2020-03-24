@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Android Cloud SDK</string>
+    <string name="select_device">Select Device:</string>
     <string name="get_latest_release">Get Latest Release</string>
-    <string name="post_chunks">Post Chunks</string>
+    <string name="add_chunks">Add Chunks</string>
+    <string name="send_chunks">Send Chunks</string>
+
+    <string-array name="device_serial_names">
+        <item>Serial One</item>
+        <item>Serial Two</item>
+    </string-array>
 </resources>

@@ -1,29 +1,58 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext {
-        kotlin_version = '1.3.61'
-        minSdkVersion = 18
-        compileSdkVersion = 29
-
-        kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-        appCompat = 'androidx.appcompat:appcompat:1.1.0'
-        coreKtx = 'androidx.core:core-ktx:1.2.0'
-        constraintLayout = 'androidx.constraintlayout:constraintlayout:1.1.3'
-        lifecycleExtensions = 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-        viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-        okio = 'com.squareup.okio:okio:2.4.1'
-        dokka = 'org.jetbrains.dokka:dokka-gradle-plugin:0.10.1'
-    }
+    ext.versions = [
+        'kotlin': '1.3.71',
+        'minSdk': 18,
+        'compileSdk': 29,
+        'appCompat': '1.1.0',
+        'coreKtx': '1.2.0',
+        'constraintLayout': '1.1.3',
+        'dokka': '0.10.1',
+        'androidGradlePlugin': '3.6.1',
+        'json': '20180130',
+        'junit': '4.12',
+        'lifecycleExtensions': '2.2.0',
+        'leakCanary': '2.2',
+        'mockitoKotlin': '2.2.0',
+        'okio': '2.4.1',
+        'viewmodelKtx': '2.2.0'
+    ]
+    ext.deps = [
+        'android': [
+            'appCompat': "androidx.appcompat:appcompat:${versions.appCompat}",
+            'coreKtx': "androidx.core:core-ktx:${versions.coreKtx}",
+            'constraintLayout': "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+            'gradlePlugin': "com.android.tools.build:gradle:${versions.androidGradlePlugin}",
+            'lifecycleExtensions': "androidx.lifecycle:lifecycle-extensions:${versions.lifecycleExtensions}",
+            'viewmodelKtx': "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.viewmodelKtx}",
+        ],
+        'kotlin': [
+            'gradlePlugin': "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+            'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
+        ],
+        'dokka': "org.jetbrains.dokka:dokka-gradle-plugin:${versions.dokka}",
+        'okio': "com.squareup.okio:okio:${versions.okio}",
+        'leakCanary': "com.squareup.leakcanary:leakcanary-android:${versions.leakCanary}",
+        'test': [
+            'kotlin': [
+                'common': 'org.jetbrains.kotlin:kotlin-test-common',
+                'jdk': 'org.jetbrains.kotlin:kotlin-test-junit',
+            ],
+            'mockitoKotlin': "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoKotlin}",
+            'json': "org.json:json:${versions.json}",
+            'junit': "junit:junit:${versions.junit}"
+        ]
+    ]
     repositories {
         google()
         jcenter()
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath rootProject.ext.dokka
+        classpath deps.android.gradlePlugin
+        classpath deps.kotlin.gradlePlugin
+        classpath deps.dokka
     }
 }
 

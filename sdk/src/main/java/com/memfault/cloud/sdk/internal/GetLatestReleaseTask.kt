@@ -19,7 +19,7 @@ class GetLatestReleaseTask internal constructor(
     private val callback: GetLatestReleaseCallback
 ) : Runnable {
 
-    private fun createCallbackTaskFromResponse(response: HttpResponse?): Runnable {
+    internal fun createCallbackTaskFromResponse(response: HttpResponse?): Runnable {
         when {
             (response == null) -> return Runnable {
                 callback.onError(IOException("Network unavailable"))

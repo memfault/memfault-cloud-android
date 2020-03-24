@@ -8,6 +8,29 @@
     android:layout_height="match_parent"
     tools:context=".SampleActivity">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/select_device_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/device_spinner"
+        android:text="@string/select_device"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="16dp"
+        android:entries="@array/device_serial_names" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/device_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_buttons"
+        android:text="@string/get_latest_release"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="16dp"
+        android:entries="@array/device_serial_names" />
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_buttons"
         android:layout_width="wrap_content"
@@ -19,7 +42,7 @@
         android:id="@+id/button_get_latest_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_buttons"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_buttons"
         android:text="@string/get_latest_release"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -27,13 +50,25 @@
         android:onClick="getLatestRelease" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_post_chunks"
+        android:id="@+id/button_add_chunks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_buttons"
-        android:text="@string/post_chunks"
+        app:layout_constraintTop_toBottomOf="@+id/button_get_latest_release"
+        android:text="@string/add_chunks"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="16dp"
-        android:onClick="postChunks" />
+        android:onClick="addChunks" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_send_chunks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/button_add_chunks"
+        android:text="@string/send_chunks"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        android:onClick="sendChunks" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

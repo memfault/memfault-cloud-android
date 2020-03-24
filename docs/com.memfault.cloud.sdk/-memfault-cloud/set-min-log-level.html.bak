@@ -1,0 +1,15 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MemfaultCloud.setMinLogLevel - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">MemfaultCloud</a>&nbsp;/&nbsp;<a href="./set-min-log-level.html">setMinLogLevel</a><br/>
+<br/>
+<h1>setMinLogLevel</h1>
+<a name="com.memfault.cloud.sdk.MemfaultCloud.Companion$setMinLogLevel(com.memfault.cloud.sdk.MemfaultCloud.LogLevel)"></a>
+<code><span class="identifier">@JvmStatic</span> <span class="keyword">fun </span><span class="identifier">setMinLogLevel</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultCloud.Companion$setMinLogLevel(com.memfault.cloud.sdk.MemfaultCloud.LogLevel)/level">level</span><span class="symbol">:</span>&nbsp;<span class="identifier">LogLevel</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Logs at <code>level</code> and above will be logged to LogCat.</p>
+</BODY>
+</HTML>

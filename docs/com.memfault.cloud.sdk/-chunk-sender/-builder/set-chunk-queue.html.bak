@@ -1,0 +1,19 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ChunkSender.Builder.setChunkQueue - sdk</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="../index.html">ChunkSender</a>&nbsp;/&nbsp;<a href="index.html">Builder</a>&nbsp;/&nbsp;<a href="./set-chunk-queue.html">setChunkQueue</a><br/>
+<br/>
+<h1>setChunkQueue</h1>
+<a name="com.memfault.cloud.sdk.ChunkSender.Builder$setChunkQueue(com.memfault.cloud.sdk.ChunkQueue)"></a>
+<code><span class="keyword">fun </span><span class="identifier">setChunkQueue</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.ChunkSender.Builder$setChunkQueue(com.memfault.cloud.sdk.ChunkQueue)/chunkQueue">chunkQueue</span><span class="symbol">:</span>&nbsp;<a href="../../-chunk-queue/index.html"><span class="identifier">ChunkQueue</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Builder</span></code>
+<p>Provide a custom <a href="../../-chunk-queue/index.html">ChunkQueue</a> that is managed by the caller.</p>
+<p>Use this API if you wish to provide a persistent <a href="../../-chunk-queue/index.html">ChunkQueue</a> implementation.</p>
+<p>Only clear items from the <a href="set-chunk-queue.html#com.memfault.cloud.sdk.ChunkSender.Builder$setChunkQueue(com.memfault.cloud.sdk.ChunkQueue)/chunkQueue">chunkQueue</a> after calling <a href="../../-memfault-cloud/deinit.html">MemfaultCloud.deinit</a> to avoid
+concurrency issues with any work that is currently in-flight.</p>
+<p>It is safe to add items to the queue at any time.</p>
+</BODY>
+</HTML>

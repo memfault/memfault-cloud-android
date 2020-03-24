@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.dokka'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.compileSdkVersion
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
         versionName VERSION_NAME
 
         consumerProguardFiles 'consumer-rules.pro'
@@ -26,13 +26,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    implementation rootProject.ext.kotlinStdlib
-    implementation rootProject.ext.coreKtx
-    implementation rootProject.ext.okio
+    implementation deps.kotlin.stdlib
+    implementation deps.okio
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.kotlin.common
+    testImplementation deps.test.kotlin.jdk
+    testImplementation deps.test.json
+    testImplementation deps.test.mockitoKotlin
 }
 
 dokka {

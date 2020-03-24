@@ -16,32 +16,32 @@
 <h4><a href="-chunk-queue/index.html">ChunkQueue</a></h4>
 </td>
 <td>
-<p>An API that allows a <a href="-memfault-chunk-sender/index.html">MemfaultChunkSender</a> to queue chunks into batched requests.</p>
+<p>An API that allows a <a href="-chunk-sender/index.html">ChunkSender</a> to queue chunks into batched requests.</p>
 <code><span class="keyword">interface </span><span class="identifier">ChunkQueue</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-chunk-sender/index.html">ChunkSender</a></h4>
+</td>
+<td>
+<p>Send chunks for a given device to Memfault's web services.</p>
+<code><span class="keyword">class </span><span class="identifier">ChunkSender</span></code></td>
 </tr>
 <tr>
 <td>
 <h4><a href="-get-latest-release-callback/index.html">GetLatestReleaseCallback</a></h4>
 </td>
 <td>
-<p>Receive the result of <a href="-memfault-api/get-latest-release.html">MemfaultApi.getLatestRelease</a>.</p>
+<p>Receive the result of <a href="-memfault-cloud/get-latest-release.html">MemfaultCloud.getLatestRelease</a>.</p>
 <code><span class="keyword">interface </span><span class="identifier">GetLatestReleaseCallback</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Callback</span></code></td>
 </tr>
 <tr>
 <td>
-<h4><a href="-memfault-api/index.html">MemfaultApi</a></h4>
+<h4><a href="-memfault-cloud/index.html">MemfaultCloud</a></h4>
 </td>
 <td>
 <p>The Memfault SDK entrypoint.</p>
-<code><span class="keyword">class </span><span class="identifier">MemfaultApi</span></code></td>
-</tr>
-<tr>
-<td>
-<h4><a href="-memfault-chunk-sender/index.html">MemfaultChunkSender</a></h4>
-</td>
-<td>
-<p>An API for sending chunks for a given device to Memfault's web services.</p>
-<code><span class="keyword">class </span><span class="identifier">MemfaultChunkSender</span></code></td>
+<code><span class="keyword">class </span><span class="identifier">MemfaultCloud</span></code></td>
 </tr>
 <tr>
 <td>
@@ -61,10 +61,11 @@
 </tr>
 <tr>
 <td>
-<h4><a href="-post-chunks-callback/index.html">PostChunksCallback</a></h4>
+<h4><a href="-send-chunks-callback/index.html">SendChunksCallback</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">PostChunksCallback</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Callback</span></code></td>
+<p>A callback for <a href="-chunk-sender/send.html">ChunkSender.send</a>.</p>
+<code><span class="keyword">interface </span><span class="identifier">SendChunksCallback</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Callback</span></code></td>
 </tr>
 </tbody>
 </table>

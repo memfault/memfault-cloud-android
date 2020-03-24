@@ -1,7 +1,7 @@
 package com.memfault.cloud.sdk.internal
 
 import com.memfault.cloud.sdk.ChunkQueue
-import com.memfault.cloud.sdk.PostChunksCallback
+import com.memfault.cloud.sdk.SendChunksCallback
 import java.util.concurrent.Executor
 
 internal class PostChunksTask(
@@ -9,7 +9,7 @@ internal class PostChunksTask(
     private val executor: Executor,
     private val deviceSerial: String,
     private val chunkQueue: ChunkQueue,
-    private val callback: PostChunksCallback,
+    private val callback: SendChunksCallback,
     private val maxChunksPerRequest: Int = 1000
 ) : Runnable {
     override fun run() {

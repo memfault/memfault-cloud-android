@@ -1,7 +1,7 @@
 package com.memfault.cloud.sdk
 
 /**
- * Receive the result of [MemfaultApi.getLatestRelease].
+ * Receive the result of [MemfaultCloud.getLatestRelease].
  *
  * All methods are run on the main thread. Only one method will be called.
  */
@@ -10,7 +10,7 @@ interface GetLatestReleaseCallback : Callback {
     /**
      * Called when an update is available for the given device.
      *
-     * @param memfaultOtaPackage describing the update.
+     * @param otaPackage describing the update.
      */
     fun onUpdateAvailable(otaPackage: MemfaultOtaPackage)
 

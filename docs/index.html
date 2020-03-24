@@ -18,16 +18,16 @@ demonstrates the functionality of this library.</p>
 <h3>Adding the SDK to your project</h3>
 <p>Add the library to your application's <code>build.gradle</code>:</p>
 <pre><code class="lang-groovy">dependencies {
-  implementation 'com.memfault.cloud.sdk:1.0.0-RC1'
+  implementation 'com.memfault.cloud.sdk:1.0.0-RC2'
 }
 </code></pre>
 <h4>Initialization</h4>
-<p>The <a href="com.memfault.cloud.sdk/-memfault-api/index.html">MemfaultApi</a> class is the
-main entry point for the <code>MemfaultCloud</code> SDK. We recommend creating only one
-<code>MemfaultApi</code> instance and using it across your entire application.</p>
+<p>The <a href="com.memfault.cloud.sdk/-memfault-cloud/index.html">MemfaulCloud</a> class is
+the main entry point for the <code>MemfaultCloud</code> SDK. We recommend creating only one
+<code>MemfaultCloud</code> instance and using it across your entire application.</p>
 <h4>Getting the latest release</h4>
 <p>Use the
-<a href="com.memfault.cloud.sdk/-memfault-api/get-latest-release.html">memfaultApi.getLatestRelease</a>
+<a href="com.memfault.cloud.sdk/-memfault-cloud/get-latest-release.html">memfaultCloud.getLatestRelease</a>
 API to query Memfault's services to find if a new update is available for a
 device.</p>
 <h4>Uploading Chunks</h4>
@@ -35,9 +35,8 @@ device.</p>
 "chunks". See
 <a href="https://docs.memfault.com/docs/embedded/data-from-firmware-to-the-cloud">this tutorial for details</a>.</p>
 <p>Once you have established sending chunks from your device to the Android app,
-use the
-<a href="com.memfault.cloud.sdk/-memfault-chunk-sender/index.html">MemfaultChunkSender</a>
-API to upload these chunks to Memfault.</p>
+use the <a href="com.memfault.cloud.sdk/-chunk-sender/index.html">ChunkSender</a> API to
+upload these chunks to Memfault.</p>
 <h3>Acknowledgements</h3>
 <p>We used Square's excellent <a href="https://square.github.io/okhttp/">OKHTTP</a> library as
 a reference when implementing this SDK's HTTP code.</p>

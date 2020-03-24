@@ -2,40 +2,58 @@ package com.memfault.cloud.sample
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.memfault.cloud.sdk.ChunkSender
 import com.memfault.cloud.sdk.GetLatestReleaseCallback
-import com.memfault.cloud.sdk.MemfaultApi
-import com.memfault.cloud.sdk.MemfaultChunkSender
+import com.memfault.cloud.sdk.MemfaultCloud
 import com.memfault.cloud.sdk.MemfaultDeviceInfo
 import com.memfault.cloud.sdk.MemfaultOtaPackage
-import com.memfault.cloud.sdk.PostChunksCallback
+import com.memfault.cloud.sdk.SendChunksCallback
 
-private const val DEVICE_SERIAL = ""
+private const val DEVICE_SERIAL_ONE = ""
+private const val DEVICE_SERIAL_TWO = ""
 
 class SampleViewModel : ViewModel() {
-    val memfaultApi = MemfaultApi.Builder()
+    init {
+        MemfaultCloud.setMinLogLevel(MemfaultCloud.LogLevel.VERBOSE)
+    }
+
+    private val memfaultCloud = MemfaultCloud.Builder()
         .setApiKey("") // Add your API key here!
         .build()
 
-    val chunkSender = MemfaultChunkSender.Builder()
-        .setMemfaultApi(memfaultApi)
-        .setDeviceSerialNumber(DEVICE_SERIAL)
-        .build()
-
-    val deviceInfo = MemfaultDeviceInfo(
-        deviceSerial = DEVICE_SERIAL,
-        hardwareVersion = "nrf-proto",
-        currentVersion = "1.0.0",
-        softwareType = "main"
+    private val chunkSenderMap = mutableMapOf<String, ChunkSender>()
+    private val deviceInfoMap = mapOf(
+        DEVICE_SERIAL_ONE to MemfaultDeviceInfo(
+            deviceSerial = DEVICE_SERIAL_ONE,
+            hardwareVersion = "nrf-proto",
+            currentVersion = "1.0.0",
+            softwareType = "main"
+        ),
+        DEVICE_SERIAL_TWO to MemfaultDeviceInfo(
+            deviceSerial = DEVICE_SERIAL_TWO,
+            hardwareVersion = "nrf-proto",
+            currentVersion = "1.0.0",
+            softwareType = "main"
+        )
     )
 
-    override fun onCleared() {
-        chunkSender.stop()
-        memfaultApi.deinit()
+    private fun deviceInfo(serial: String) = checkNotNull(deviceInfoMap[serial]) {
+        "Illegal selection"
     }
 
-    fun getLatestRelease() {
-        memfaultApi.getLatestRelease(deviceInfo, callback = object : GetLatestReleaseCallback {
+    private fun chunkSender(serial: String) = chunkSenderMap.getOrPut(serial) {
+        ChunkSender.Builder()
+            .setMemfaultCloud(memfaultCloud)
+            .setDeviceSerialNumber(serial)
+            .build()
+    }
 
+    override fun onCleared() {
+        memfaultCloud.deinit()
+    }
+
+    fun getLatestRelease(serial: String) =
+        memfaultCloud.getLatestRelease(deviceInfo(serial), callback = object : GetLatestReleaseCallback {
             override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) {
                 Log.d("MFLT-SAMPLE", "Update available")
             }
@@ -48,26 +66,28 @@ class SampleViewModel : ViewModel() {
                 Log.d("MFLT-SAMPLE", "Failed to get latest release", e)
             }
         })
-    }
 
     @ExperimentalUnsignedTypes
-    fun postChunks() {
-        chunkSender.postChunks(
-            listOf(CHUNK_ONE, CHUNK_TWO),
-            callback = object : PostChunksCallback {
-                override fun onError(e: Exception, sent: Int) {
-                    Log.e("MFLT-SAMPLE", "Error: sent $sent ", e)
-                }
-
-                override fun onQueueEmpty(sent: Int) {
-                    Log.i("MFLT-SAMPLE", "Queue empty: sent $sent")
-                }
-
-                override fun onRetryAfterDelay(delay: Long, sent: Int) {
-                    Log.i("MFLT-SAMPLE", "Retry: delay $delay sent $sent")
-                }
-            })
+    fun addChunks(serial: String) {
+        Log.d("MFLT-SAMPLE", "Adding chunks")
+        chunkSender(serial).addChunks(listOf(CHUNK_ONE, CHUNK_TWO))
     }
+
+    fun sendChunks(serial: String) = chunkSender(serial).send(
+        callback = object : SendChunksCallback {
+            override fun onError(e: Exception, sent: Int) {
+                Log.e("MFLT-SAMPLE", "Error: sent $sent ", e)
+            }
+
+            override fun onQueueEmpty(sent: Int) {
+                Log.i("MFLT-SAMPLE", "Queue empty: sent $sent")
+            }
+
+            override fun onRetryAfterDelay(delay: Long, sent: Int) {
+                Log.i("MFLT-SAMPLE", "Retry: delay $delay sent $sent")
+            }
+        }
+    )
 
     companion object {
         @ExperimentalUnsignedTypes

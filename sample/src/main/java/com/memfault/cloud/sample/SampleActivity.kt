@@ -2,7 +2,9 @@ package com.memfault.cloud.sample
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.lifecycle.ViewModelProvider
 
 class SampleActivity : AppCompatActivity() {
@@ -14,7 +16,11 @@ class SampleActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(SampleViewModel::class.java)
     }
 
-    fun getLatestRelease(v: View) = viewModel.getLatestRelease()
+    fun getLatestRelease(v: View) = viewModel.getLatestRelease(currentSelection())
 
-    fun postChunks(v: View) = viewModel.postChunks()
+    fun addChunks(v: View) = viewModel.addChunks(currentSelection())
+
+    fun sendChunks(v: View) = viewModel.sendChunks(currentSelection())
+
+    private fun currentSelection() = this.findViewById<Spinner>(R.id.device_spinner).selectedItem.toString()
 }

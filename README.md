@@ -17,20 +17,20 @@ Add the library to your application's `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.memfault.cloud.sdk:1.0.0-RC1'
+  implementation 'com.memfault.cloud.sdk:1.0.0-RC2'
 }
 ```
 
 #### Initialization
 
-The [MemfaultApi](com.memfault.cloud.sdk/-memfault-api/index.html) class is the
-main entry point for the `MemfaultCloud` SDK. We recommend creating only one
-`MemfaultApi` instance and using it across your entire application.
+The [MemfaulCloud](com.memfault.cloud.sdk/-memfault-cloud/index.html) class is
+the main entry point for the `MemfaultCloud` SDK. We recommend creating only one
+`MemfaultCloud` instance and using it across your entire application.
 
 #### Getting the latest release
 
 Use the
-[memfaultApi.getLatestRelease](com.memfault.cloud.sdk/-memfault-api/get-latest-release.html)
+[memfaultCloud.getLatestRelease](com.memfault.cloud.sdk/-memfault-cloud/get-latest-release.html)
 API to query Memfault's services to find if a new update is available for a
 device.
 
@@ -41,9 +41,8 @@ The Memfault Firmware SDK packetizes data to be sent to Memfault's cloud into
 [this tutorial for details](https://docs.memfault.com/docs/embedded/data-from-firmware-to-the-cloud).
 
 Once you have established sending chunks from your device to the Android app,
-use the
-[MemfaultChunkSender](com.memfault.cloud.sdk/-memfault-chunk-sender/index.html)
-API to upload these chunks to Memfault.
+use the [ChunkSender](com.memfault.cloud.sdk/-chunk-sender/index.html) API to
+upload these chunks to Memfault.
 
 ### Acknowledgements
 
