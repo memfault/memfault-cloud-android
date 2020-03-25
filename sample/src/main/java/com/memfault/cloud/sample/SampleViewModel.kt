@@ -1,18 +1,21 @@
 package com.memfault.cloud.sample
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import com.memfault.cloud.sdk.ChunkSender
 import com.memfault.cloud.sdk.GetLatestReleaseCallback
 import com.memfault.cloud.sdk.MemfaultCloud
 import com.memfault.cloud.sdk.MemfaultDeviceInfo
 import com.memfault.cloud.sdk.MemfaultOtaPackage
 import com.memfault.cloud.sdk.SendChunksCallback
+import java.io.File
 
-private const val DEVICE_SERIAL_ONE = ""
-private const val DEVICE_SERIAL_TWO = ""
+private const val DEVICE_SERIAL_ONE = "Serial One"
+private const val DEVICE_SERIAL_TWO = "Serial Two"
 
-class SampleViewModel : ViewModel() {
+class SampleViewModel(application: Application) : AndroidViewModel(application) {
     init {
         MemfaultCloud.setMinLogLevel(MemfaultCloud.LogLevel.VERBOSE)
     }
@@ -44,6 +47,11 @@ class SampleViewModel : ViewModel() {
     private fun chunkSender(serial: String) = chunkSenderMap.getOrPut(serial) {
         ChunkSender.Builder()
             .setMemfaultCloud(memfaultCloud)
+            .setChunkQueue(
+                PersistentChunkQueue(
+                    File(getApplication<Application>().filesDir, serial)
+                )
+            )
             .setDeviceSerialNumber(serial)
             .build()
     }
@@ -54,40 +62,40 @@ class SampleViewModel : ViewModel() {
 
     fun getLatestRelease(serial: String) =
         memfaultCloud.getLatestRelease(deviceInfo(serial), callback = object : GetLatestReleaseCallback {
-            override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) {
-                Log.d("MFLT-SAMPLE", "Update available")
-            }
+            override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) = logAndShowToast("Update available")
 
-            override fun onUpToDate() {
-                Log.d("MFLT-SAMPLE", "Release up to date")
-            }
+            override fun onUpToDate() = logAndShowToast("Release up to date")
 
-            override fun onError(e: Exception) {
-                Log.d("MFLT-SAMPLE", "Failed to get latest release", e)
-            }
+            override fun onError(e: Exception) = logAndShowToast("Failed to get latest release", e)
         })
 
     @ExperimentalUnsignedTypes
     fun addChunks(serial: String) {
-        Log.d("MFLT-SAMPLE", "Adding chunks")
         chunkSender(serial).addChunks(listOf(CHUNK_ONE, CHUNK_TWO))
+        logAndShowToast("Added chunks for $serial")
     }
 
     fun sendChunks(serial: String) = chunkSender(serial).send(
         callback = object : SendChunksCallback {
-            override fun onError(e: Exception, sent: Int) {
-                Log.e("MFLT-SAMPLE", "Error: sent $sent ", e)
-            }
+            override fun onError(e: Exception, sent: Int) = logAndShowToast("Error: sent $sent", e)
 
-            override fun onQueueEmpty(sent: Int) {
-                Log.i("MFLT-SAMPLE", "Queue empty: sent $sent")
-            }
+            override fun onQueueEmpty(sent: Int) = logAndShowToast("Success, queue empty: sent $sent")
 
-            override fun onRetryAfterDelay(delay: Long, sent: Int) {
-                Log.i("MFLT-SAMPLE", "Retry: delay $delay sent $sent")
-            }
+            // Schedule a re-try, e.g. using https://developer.android.com/reference/android/app/job/JobScheduler
+            override fun onRetryAfterDelay(delay: Long, sent: Int) = logAndShowToast("Retry: delay $delay sent $sent")
         }
     )
+
+    fun spinnerEntries(): List<String> = deviceInfoMap.keys.toList()
+
+    private fun logAndShowToast(message: String, e: Exception? = null) {
+        if (e != null) {
+            Log.e("MFLT-SAMPLE", message, e)
+        } else {
+            Log.d("MFLT-SAMPLE", message)
+        }
+        Toast.makeText(getApplication(), message, Toast.LENGTH_SHORT).show()
+    }
 
     companion object {
         @ExperimentalUnsignedTypes
