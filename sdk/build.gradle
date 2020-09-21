@@ -12,6 +12,9 @@ android {
         versionName VERSION_NAME
 
         consumerProguardFiles 'consumer-rules.pro'
+
+        buildConfigField "String", "MEMFAULT_BASE_API_URL", "\"$MEMFAULT_BASE_API_URL\""
+        buildConfigField "String", "MEMFAULT_BASE_INGRESS_URL", "\"$MEMFAULT_BASE_INGRESS_URL\""
     }
 
     lintOptions {

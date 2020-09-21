@@ -4,6 +4,7 @@ import android.net.Uri
 import okio.Buffer
 import okio.buffer
 import okio.sink
+import java.io.Closeable
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.UUID
@@ -89,7 +90,16 @@ data class HttpResponse(
     val message: String,
     val body: InputStream,
     val headers: Map<String, String>
-)
+): Closeable {
+    override fun close() {
+        try {
+            body.close()
+        } catch (rethrown: RuntimeException) {
+            throw rethrown
+        } catch (_: Exception) {
+        }
+    }
+}
 
 fun HttpResponse?.isSucessful(): Boolean = if (this == null) false else this.code < 300
 

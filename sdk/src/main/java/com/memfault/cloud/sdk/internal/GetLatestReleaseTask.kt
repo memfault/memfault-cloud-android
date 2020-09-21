@@ -8,6 +8,8 @@ import okio.source
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.net.SocketTimeoutException
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executor
 
 private const val HTTP_NO_CONTENT = 204
@@ -32,28 +34,26 @@ class GetLatestReleaseTask internal constructor(
             }
         }
 
-        val body = response?.body?.source()?.buffer().use {
-            it?.readUtf8()
-        }
+        val body = response?.body?.source()?.buffer()?.readUtf8()
 
-        try {
+        return try {
             checkNotNull(body) {
                 throw JSONException("Empty response body")
             }
             val jsonObject = JSONObject(body)
             val otaPackage = jsonToOtaPackage(jsonObject)
-            return Runnable { callback.onUpdateAvailable(otaPackage) }
+            Runnable { callback.onUpdateAvailable(otaPackage) }
         } catch (e: JSONException) {
             Logger.e("Failed to parse JSON response", e)
-            return Runnable { callback.onError(e) }
+            Runnable { callback.onError(e) }
         }
     }
 
-    override fun run() {
-        val response = memfaultHttpApi.getLatestRelease(deviceInfo)
-        val callbackTask = createCallbackTaskFromResponse(response)
-        executor.execute(callbackTask)
-    }
+    override fun run() = memfaultHttpApi.getLatestRelease(deviceInfo).use {
+            createCallbackTaskFromResponse(it)
+        }.let {
+            executor.execute(it)
+        }
 
     companion object {
         private const val ARTIFACTS = "artifacts"

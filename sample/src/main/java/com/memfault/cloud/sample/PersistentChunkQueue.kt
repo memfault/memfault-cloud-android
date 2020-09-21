@@ -45,7 +45,7 @@ class PersistentChunkQueue(
     }
 
     /**
-     * Return at most `count` bytes from the head of the queue.
+     * Return at most `count` items from the head of the queue.
      */
     @Synchronized
     override fun peek(count: Int): List<ByteArray> {

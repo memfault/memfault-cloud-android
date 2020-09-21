@@ -56,11 +56,10 @@ internal class UrlConnectionHttpClient : HttpClient {
             when {
                 (responseCode > 299) -> urlConnection.errorStream
                 else -> urlConnection.inputStream
-            }.use { responseBodyStream ->
+            }.let { responseBodyStream ->
                 val formattedResponseHeaders = rawHeaders.map {
                     it.key to it.value.joinToString()
                 }.toMap()
-
                 return HttpResponse(
                     responseCode,
                     responseMessage,

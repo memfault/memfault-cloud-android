@@ -14,6 +14,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "MEMFAULT_PROJECT_API_KEY", "\"$MEMFAULT_PROJECT_API_KEY\""
     }
 
     buildTypes {

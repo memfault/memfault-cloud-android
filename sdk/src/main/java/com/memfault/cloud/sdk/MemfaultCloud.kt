@@ -142,12 +142,12 @@ class MemfaultCloud internal constructor(
         /**
          * @suppress
          */
-        var baseApiUrl = "https://api.memfault.com"
+        var baseApiUrl = BuildConfig.MEMFAULT_BASE_API_URL
 
         /**
          * @suppress
          */
-        var baseIngressUrl = "https://ingress.memfault.com"
+        var baseIngressUrl = BuildConfig.MEMFAULT_BASE_INGRESS_URL
 
         /**
          * Provide the project API key.

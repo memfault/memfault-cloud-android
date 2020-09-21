@@ -21,7 +21,7 @@ class SampleViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private val memfaultCloud = MemfaultCloud.Builder()
-        .setApiKey("") // Add your API key here!
+        .setApiKey(BuildConfig.MEMFAULT_PROJECT_API_KEY)
         .build()
 
     private val chunkSenderMap = mutableMapOf<String, ChunkSender>()
