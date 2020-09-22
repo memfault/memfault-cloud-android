@@ -19,7 +19,7 @@ Add the library to your application's `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.memfault.cloud:cloud-android:1.0.0'
+  implementation 'com.memfault.cloud:cloud-android:1.0.1'
 }
 ```
 

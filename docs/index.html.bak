@@ -20,7 +20,7 @@ is logged to LogCat and displayed as Toasts.</p>
 <h3>Adding the SDK to your project</h3>
 <p>Add the library to your application's <code>build.gradle</code>:</p>
 <pre><code class="lang-groovy">dependencies {
-  implementation 'com.memfault.cloud:cloud-android:1.0.0'
+  implementation 'com.memfault.cloud:cloud-android:1.0.1'
 }
 </code></pre>
 <p>The artifact is hosted on the
