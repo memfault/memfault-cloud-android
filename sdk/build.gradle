@@ -14,7 +14,7 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
 
         buildConfigField "String", "MEMFAULT_BASE_API_URL", "\"$MEMFAULT_BASE_API_URL\""
-        buildConfigField "String", "MEMFAULT_BASE_INGRESS_URL", "\"$MEMFAULT_BASE_INGRESS_URL\""
+        buildConfigField "String", "MEMFAULT_BASE_CHUNKS_URL", "\"$MEMFAULT_BASE_CHUNKS_URL\""
     }
 
     lintOptions {

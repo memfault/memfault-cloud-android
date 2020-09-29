@@ -1,5 +1,11 @@
 # MemfaultCloud Android Changelog
 
+## v1.0.2 - September 25, 2020
+
+#### :chart_with_upwards_trend: Improvements
+
+- Changes the default ingress URL to point to `https://chunks.memfault.com`
+
 ## v1.0.1 - September 17, 2020
 
 #### :chart_with_upwards_trend: Improvements

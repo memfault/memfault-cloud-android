@@ -99,7 +99,7 @@ class MemfaultCloud internal constructor(
     internal val mainThreadExecutor: Executor,
     internal val workerThreadExecutor: Executor,
     private val baseApiUrl: String,
-    private val baseIngressUrl: String,
+    private val baseChunksUrl: String,
     private val apiKey: String
 ) {
 
@@ -147,7 +147,7 @@ class MemfaultCloud internal constructor(
         /**
          * @suppress
          */
-        var baseIngressUrl = BuildConfig.MEMFAULT_BASE_INGRESS_URL
+        var baseChunksUrl = BuildConfig.MEMFAULT_BASE_CHUNKS_URL
 
         /**
          * Provide the project API key.
@@ -164,7 +164,7 @@ class MemfaultCloud internal constructor(
             mainThreadExecutor = mainThreadExecutor ?: MainThreadExecutor(),
             workerThreadExecutor = workerThreadExecutor ?: dynamicSingleThreadExecutor(),
             baseApiUrl = baseApiUrl,
-            baseIngressUrl = baseIngressUrl,
+            baseChunksUrl = baseChunksUrl,
             apiKey = checkNotNull(apiKey)
         )
     }
@@ -186,7 +186,7 @@ class MemfaultCloud internal constructor(
     internal fun buildMemfaultHttpApi() = MemfaultHttpApi(
         httpClient = UrlConnectionHttpClient(),
         baseApiUrl = baseApiUrl,
-        baseIngressUrl = baseIngressUrl,
+        baseChunksUrl = baseChunksUrl,
         apiKey = apiKey
     )
 

@@ -8,7 +8,7 @@ import java.util.UUID
 internal class MemfaultHttpApi(
     private val httpClient: HttpClient,
     private val baseApiUrl: String,
-    private val baseIngressUrl: String,
+    private val baseChunksUrl: String,
     private val apiKey: String
 ) {
     private fun buildBaseHeaders(): Map<String, String> {
@@ -37,7 +37,7 @@ internal class MemfaultHttpApi(
     }
 
     fun postChunks(deviceSerial: String, chunks: List<ByteArray>): HttpResponse? {
-        val uri = Uri.parse(baseIngressUrl)
+        val uri = Uri.parse(baseChunksUrl)
             .buildUpon()
             .appendPath("api")
             .appendPath("v0")
