@@ -6,8 +6,8 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLSocketFactory
 
-private const val CONNECT_TIMEOUT_MS = 5000
-private const val READ_TIMEOUT_MS = 10000
+private const val CONNECT_TIMEOUT_MS = 10000
+private const val READ_TIMEOUT_MS = 30000
 
 internal class UrlConnectionHttpClient : HttpClient {
 

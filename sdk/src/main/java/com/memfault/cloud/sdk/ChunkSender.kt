@@ -43,7 +43,8 @@ import com.memfault.cloud.sdk.internal.TemporaryChunkQueue
 class ChunkSender private constructor(
     private val memfaultCloud: MemfaultCloud,
     private val deviceSerial: String,
-    private val chunkQueue: ChunkQueue
+    private val chunkQueue: ChunkQueue,
+    private var maxChunksPerRequest: Int
 ) {
     /**
      * Build a [ChunkSender] instance for a given device.
@@ -54,6 +55,7 @@ class ChunkSender private constructor(
         private var memfaultCloud: MemfaultCloud? = null
         private var deviceSerial: String? = null
         private var chunkQueue: ChunkQueue? = null
+        private var maxChunksPerRequest: Int = 100
 
         /**
          * Provide a custom [ChunkQueue] that is managed by the caller.
@@ -89,13 +91,19 @@ class ChunkSender private constructor(
             return this
         }
 
+        fun setMaxChunksPerRequest(maxChunksPerRequest: Int): Builder {
+            this.maxChunksPerRequest = maxChunksPerRequest
+            return this
+        }
+
         /**
          * Create a [ChunkSender] instance using the configured values.
          */
         fun build(): ChunkSender = ChunkSender(
             memfaultCloud = checkNotNull(memfaultCloud) { "Memfault API must not be null" },
             deviceSerial = checkNotNull(deviceSerial) { "Device serial number must not be null" },
-            chunkQueue = chunkQueue ?: TemporaryChunkQueue()
+            chunkQueue = chunkQueue ?: TemporaryChunkQueue(),
+            maxChunksPerRequest = maxChunksPerRequest
         )
     }
 
@@ -123,7 +131,8 @@ class ChunkSender private constructor(
                 executor = memfaultCloud.mainThreadExecutor,
                 deviceSerial = deviceSerial,
                 chunkQueue = chunkQueue,
-                callback = callback
+                callback = callback,
+                maxChunksPerRequest = maxChunksPerRequest
             )
         )
     }

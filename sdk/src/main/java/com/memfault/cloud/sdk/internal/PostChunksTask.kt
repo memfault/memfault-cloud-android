@@ -10,7 +10,7 @@ internal class PostChunksTask(
     private val deviceSerial: String,
     private val chunkQueue: ChunkQueue,
     private val callback: SendChunksCallback,
-    private val maxChunksPerRequest: Int = 1000
+    private val maxChunksPerRequest: Int
 ) : Runnable {
     override fun run() {
         var chunksSent = 0

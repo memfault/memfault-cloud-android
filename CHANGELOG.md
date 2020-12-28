@@ -1,5 +1,13 @@
 # MemfaultCloud Android Changelog
 
+## v1.0.3 - December 28, 2020
+
+#### :chart_with_upwards_trend: Improvements
+
+- Improves SDK performance by increasing HTTP client request timeouts and
+  decreasing the number of chunks that can be uploaded in a single request
+- Bump gradle plugin version
+
 ## v1.0.2 - September 25, 2020
 
 #### :chart_with_upwards_trend: Improvements

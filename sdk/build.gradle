@@ -15,6 +15,7 @@ android {
 
         buildConfigField "String", "MEMFAULT_BASE_API_URL", "\"$MEMFAULT_BASE_API_URL\""
         buildConfigField "String", "MEMFAULT_BASE_CHUNKS_URL", "\"$MEMFAULT_BASE_CHUNKS_URL\""
+        buildConfigField "String", "VERSION_NAME", "\"$VERSION_NAME\""
     }
 
     lintOptions {
