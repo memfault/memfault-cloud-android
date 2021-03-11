@@ -3,63 +3,62 @@ package com.memfault.cloud.sdk.internal
 import com.memfault.cloud.sdk.GetLatestReleaseCallback
 import com.memfault.cloud.sdk.MemfaultDeviceInfo
 import com.memfault.cloud.sdk.MemfaultOtaPackage
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import org.json.JSONException
-import org.json.JSONObject
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.slot
+import io.mockk.verify
 import java.io.IOException
 import java.io.InputStream
-
 import java.util.concurrent.Executor
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
+import org.json.JSONException
+import org.json.JSONObject
 
 internal class GetLatestReleaseTaskTest {
 
     @Test
     fun createCallbackFromResponse_returnsOnErrorIfNoResponse() {
-        val callback : GetLatestReleaseCallback = mock()
+        val callback: GetLatestReleaseCallback = mockk(relaxed = true)
         createTask(callback).createCallbackTaskFromResponse(null).run()
-        verify(callback).onError(any<IOException>())
+        verify { callback.onError(any<IOException>()) }
     }
 
     @Test
     fun createCallbackFromResponse_returnsOnErrorOnSadStatusCode() {
-        val mockResponse = mock<HttpResponse> {
-            on { code } doReturn 300
+        val mockResponse = mockk<HttpResponse> {
+            every { code } returns 300
+            every { message } returns ""
         }
-        val callback: GetLatestReleaseCallback = mock()
+        val callback: GetLatestReleaseCallback = mockk(relaxed = true)
         createTask(callback).createCallbackTaskFromResponse(mockResponse).run()
-        verify(callback).onError(any())
+        verify { callback.onError(any()) }
     }
 
     @Test
     fun createCallbackFromResponse_returnsUpToDateOn204() {
-        val mockResponse = mock<HttpResponse> {
-            on { code } doReturn 204
+        val mockResponse = mockk<HttpResponse> {
+            every { code } returns 204
         }
-        val callback: GetLatestReleaseCallback = mock()
+        val callback: GetLatestReleaseCallback = mockk(relaxed = true)
         createTask(callback).createCallbackTaskFromResponse(mockResponse).run()
-        verify(callback).onUpToDate()
+        verify { callback.onUpToDate() }
     }
 
     @Test
     fun createCallbackFromResponse_returnsOtaPackageOnTwoHundred() {
-        val mockResponse = mock<HttpResponse> {
-            on { code } doReturn 200
-            on { body } doReturn RESPONSE.byteInputStream(Charsets.UTF_8) as InputStream
+        val mockResponse = mockk<HttpResponse> {
+            every { code } returns 200
+            every { body } returns RESPONSE.byteInputStream(Charsets.UTF_8) as InputStream
         }
-        val callback: GetLatestReleaseCallback = mock()
+        val callback: GetLatestReleaseCallback = mockk(relaxed = true)
+        val packageSlot = slot<MemfaultOtaPackage>()
+        every { callback.onUpdateAvailable(capture(packageSlot)) } returns Unit
+
         createTask(callback).createCallbackTaskFromResponse(mockResponse).run()
 
-        argumentCaptor<MemfaultOtaPackage>().apply {
-            verify(callback).onUpdateAvailable(capture())
-            assertEquals(APP_VERSION, firstValue.appVersion)
-        }
+        assertEquals(APP_VERSION, packageSlot.captured.appVersion)
     }
 
     @Test
@@ -128,7 +127,7 @@ https://bar.s3.amazonaws.com/foo
     fun createTask(callback: GetLatestReleaseCallback) = GetLatestReleaseTask(
         deviceInfo = device,
         executor = executor,
-        memfaultHttpApi = mock(),
+        memfaultHttpApi = mockk(),
         callback = callback
     )
 }

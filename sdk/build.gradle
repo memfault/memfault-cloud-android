@@ -30,17 +30,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.okio
 
-    testImplementation deps.test.junit
+    testImplementation deps.test.junitApi
+    testImplementation deps.test.junitEngine
     testImplementation deps.test.kotlin.common
     testImplementation deps.test.kotlin.jdk
     testImplementation deps.test.json
-    testImplementation deps.test.mockitoKotlin
+    testImplementation deps.test.mockk
 }
 
 dokka {

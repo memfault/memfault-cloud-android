@@ -3,14 +3,12 @@ package com.memfault.cloud.sdk.internal
 import com.memfault.cloud.sdk.GetLatestReleaseCallback
 import com.memfault.cloud.sdk.MemfaultDeviceInfo
 import com.memfault.cloud.sdk.MemfaultOtaPackage
+import java.io.IOException
+import java.util.concurrent.Executor
 import okio.buffer
 import okio.source
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
-import java.net.SocketTimeoutException
-import java.util.concurrent.ExecutionException
-import java.util.concurrent.Executor
 
 private const val HTTP_NO_CONTENT = 204
 
@@ -50,10 +48,10 @@ class GetLatestReleaseTask internal constructor(
     }
 
     override fun run() = memfaultHttpApi.getLatestRelease(deviceInfo).use {
-            createCallbackTaskFromResponse(it)
-        }.let {
-            executor.execute(it)
-        }
+        createCallbackTaskFromResponse(it)
+    }.let {
+        executor.execute(it)
+    }
 
     companion object {
         private const val ARTIFACTS = "artifacts"

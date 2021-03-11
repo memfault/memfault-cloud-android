@@ -10,7 +10,7 @@ import java.io.IOException
  */
 class PersistentChunkQueue(
     file: File
-): ChunkQueue {
+) : ChunkQueue {
     private val queueFile = QueueFile.Builder(file).build()
 
     /**

@@ -1,13 +1,14 @@
 package com.memfault.cloud.sdk.internal
 
 import android.net.Uri
-import okio.Buffer
-import okio.buffer
-import okio.sink
 import java.io.Closeable
 import java.io.InputStream
 import java.io.OutputStream
+import java.util.Locale
 import java.util.UUID
+import okio.Buffer
+import okio.buffer
+import okio.sink
 
 private const val TWO_HYPHENS = "--"
 private const val CRLF = "\r\n"
@@ -85,12 +86,28 @@ data class MixedMultipartBody(
     override fun contentLength(): Int = totalContentLength
 }
 
+class HttpHeaderMap(private val mixedCaseHeaders: Map<String, String>) : Map<String, String> by mixedCaseHeaders {
+    private val headersByLowercaseKey by lazy { mixedCaseHeaders.mapKeys { it.key.toLowerCase(Locale.ROOT) } }
+
+    override fun containsKey(key: String) =
+        headersByLowercaseKey.containsKey(key.toLowerCase(Locale.ROOT))
+
+    override fun get(key: String): String? =
+        headersByLowercaseKey.get(key.toLowerCase(Locale.ROOT))
+
+    override val entries: Set<Map.Entry<String, String>>
+        get() = headersByLowercaseKey.entries
+
+    override val keys: Set<String>
+        get() = headersByLowercaseKey.keys
+}
+
 data class HttpResponse(
     val code: Int,
     val message: String,
     val body: InputStream,
-    val headers: Map<String, String>
-): Closeable {
+    val headers: HttpHeaderMap
+) : Closeable {
     override fun close() {
         try {
             body.close()

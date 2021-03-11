@@ -7,7 +7,7 @@ import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLSocketFactory
 
 private const val CONNECT_TIMEOUT_MS = 10000
-private const val READ_TIMEOUT_MS = 30000
+private const val READ_TIMEOUT_MS = 60000
 
 internal class UrlConnectionHttpClient : HttpClient {
 
@@ -29,8 +29,9 @@ internal class UrlConnectionHttpClient : HttpClient {
             }
 
             when (urlConnection) {
-                is HttpsURLConnection -> urlConnection.sslSocketFactory =
-                    SSLSocketFactory.getDefault() as SSLSocketFactory
+                is HttpsURLConnection ->
+                    urlConnection.sslSocketFactory =
+                        SSLSocketFactory.getDefault() as SSLSocketFactory
             }
             headers?.forEach {
                 urlConnection.addRequestProperty(it.key, it.value)
@@ -47,7 +48,7 @@ internal class UrlConnectionHttpClient : HttpClient {
                 }
             }
 
-            //////////////////////////////////////////////////////////////
+            // ////////////////////////////////////////////////////////////
             // This starts the connection
             val responseCode = urlConnection.responseCode
             val responseMessage = urlConnection.responseMessage
@@ -64,7 +65,7 @@ internal class UrlConnectionHttpClient : HttpClient {
                     responseCode,
                     responseMessage,
                     responseBodyStream,
-                    formattedResponseHeaders
+                    HttpHeaderMap(formattedResponseHeaders)
                 )
             }
         } catch (e: Exception) {

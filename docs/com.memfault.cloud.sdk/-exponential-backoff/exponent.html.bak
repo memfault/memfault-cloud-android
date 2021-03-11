@@ -1,0 +1,14 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ExponentialBackoff.exponent - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">ExponentialBackoff</a>&nbsp;/&nbsp;<a href="./exponent.html">exponent</a><br/>
+<br/>
+<h1>exponent</h1>
+<a name="com.memfault.cloud.sdk.ExponentialBackoff$exponent"></a>
+<code><span class="keyword">var </span><span class="identifier">exponent</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+</BODY>
+</HTML>

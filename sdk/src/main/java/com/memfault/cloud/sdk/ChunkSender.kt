@@ -40,11 +40,12 @@ import com.memfault.cloud.sdk.internal.TemporaryChunkQueue
  * If this is an issue for your application, you can provide the [ChunkSender] with a
  * [ChunkQueue] that is persistent.
  */
-class ChunkSender private constructor(
+class ChunkSender internal constructor(
     private val memfaultCloud: MemfaultCloud,
     private val deviceSerial: String,
     private val chunkQueue: ChunkQueue,
-    private var maxChunksPerRequest: Int
+    private var maxChunksPerRequest: Int,
+    private val errorTracker: ChunkErrorTracker
 ) {
     /**
      * Build a [ChunkSender] instance for a given device.
@@ -55,7 +56,7 @@ class ChunkSender private constructor(
         private var memfaultCloud: MemfaultCloud? = null
         private var deviceSerial: String? = null
         private var chunkQueue: ChunkQueue? = null
-        private var maxChunksPerRequest: Int = 100
+        private var maxChunksPerRequest: Int = MAX_CHUNKS_PER_REQUEST
 
         /**
          * Provide a custom [ChunkQueue] that is managed by the caller.
@@ -92,7 +93,7 @@ class ChunkSender private constructor(
         }
 
         fun setMaxChunksPerRequest(maxChunksPerRequest: Int): Builder {
-            this.maxChunksPerRequest = maxChunksPerRequest
+            this.maxChunksPerRequest = minOf(MAX_CHUNKS_PER_REQUEST, maxChunksPerRequest)
             return this
         }
 
@@ -103,7 +104,8 @@ class ChunkSender private constructor(
             memfaultCloud = checkNotNull(memfaultCloud) { "Memfault API must not be null" },
             deviceSerial = checkNotNull(deviceSerial) { "Device serial number must not be null" },
             chunkQueue = chunkQueue ?: TemporaryChunkQueue(),
-            maxChunksPerRequest = maxChunksPerRequest
+            maxChunksPerRequest = maxChunksPerRequest,
+            errorTracker = ChunkErrorTracker()
         )
     }
 
@@ -132,8 +134,11 @@ class ChunkSender private constructor(
                 deviceSerial = deviceSerial,
                 chunkQueue = chunkQueue,
                 callback = callback,
-                maxChunksPerRequest = maxChunksPerRequest
+                maxChunksPerRequest = maxChunksPerRequest,
+                errorTracker = errorTracker
             )
         )
     }
 }
+
+private const val MAX_CHUNKS_PER_REQUEST = 100

@@ -1,0 +1,14 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ChunkErrorTracker.trackError - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">ChunkErrorTracker</a>&nbsp;/&nbsp;<a href="./track-error.html">trackError</a><br/>
+<br/>
+<h1>trackError</h1>
+<a name="com.memfault.cloud.sdk.ChunkErrorTracker$trackError()"></a>
+<code><span class="keyword">fun </span><span class="identifier">trackError</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+</BODY>
+</HTML>

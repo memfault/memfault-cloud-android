@@ -201,7 +201,7 @@ class MemfaultCloud internal constructor(
 
     companion object {
         @JvmStatic
-        private fun dynamicSingleThreadExecutor(): ExecutorService = ThreadPoolExecutor(
+        internal fun dynamicSingleThreadExecutor(): ExecutorService = ThreadPoolExecutor(
             0, 1, 5L, TimeUnit.SECONDS, LinkedBlockingQueue<Runnable>()
         )
 

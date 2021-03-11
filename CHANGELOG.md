@@ -1,5 +1,30 @@
 # MemfaultCloud Android Changelog
 
+## v2.0.0 - December 28, 2020
+
+#### :boom: Breaking Changes
+
+- The `SendChunksCallback` interface has been simplified by merging the
+  `onError` and `onRetryAfterDelay` into a single callback. The rationale is
+  that the client needs to implement the same behavior for both callbacks:
+  schedule a job that calls `chunkSender.send()` after a delay.
+- `chunkSender.send()` will actively check whether the requested delay from the
+  `onRetryAfterDelay` callback is respected by the client code, to avoid
+  hammering Memfault's servers.
+
+#### :chart_with_upwards_trend: Improvements
+
+- Added logic to exponentially back-off chunk upload requests in case of errors.
+- Increased the HTTP chunk upload timeout from 30 seconds to 60 seconds. This
+  should help in scenarios where many chunks are batched into a single request
+  and/or the throughput of the network is poor.
+- Fixed a bug where the `SendChunksCallback.onQueueEmpty` was always getting
+  called after each successful request, regardless of whether the queue was
+  empty or not. At the same time, when `chunkSender.send()` would be called
+  while the queue is empty, the `SendChunksCallback.onQueueEmpty` would _not_
+  get called.
+- Re-formatted the code using ktlint.
+
 ## v1.0.3 - December 28, 2020
 
 #### :chart_with_upwards_trend: Improvements

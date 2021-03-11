@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ChunkErrorTracker - sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="./index.html">ChunkErrorTracker</a><br/>
+<br/>
+<h1>ChunkErrorTracker</h1>
+<code><span class="keyword">class </span><span class="identifier">ChunkErrorTracker</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">ChunkErrorTracker</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.ChunkErrorTracker$<init>(com.memfault.cloud.sdk.ExponentialBackoff, kotlin.Function0((kotlin.Long)))/backoff">backoff</span><span class="symbol">:</span>&nbsp;<a href="../-exponential-backoff/index.html"><span class="identifier">ExponentialBackoff</span></a>&nbsp;<span class="symbol">=</span>&nbsp;ExponentialBackoff(1.0, maxExponent = 10)<span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.ChunkErrorTracker$<init>(com.memfault.cloud.sdk.ExponentialBackoff, kotlin.Function0((kotlin.Long)))/getElapsedRealtimeMillis">getElapsedRealtimeMillis</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a>&nbsp;<span class="symbol">=</span>&nbsp;::elapsedRealtime<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="base-delay-seconds.html">baseDelaySeconds</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">baseDelaySeconds</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="consecutive-error-count.html">consecutiveErrorCount</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">consecutiveErrorCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="next-delay.html">nextDelay</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">nextDelay</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="track-error.html">trackError</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">trackError</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="track-success.html">trackSuccess</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">trackSuccess</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

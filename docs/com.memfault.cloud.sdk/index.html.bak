@@ -13,6 +13,13 @@
 <tbody>
 <tr>
 <td>
+<h4><a href="-chunk-error-tracker/index.html">ChunkErrorTracker</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ChunkErrorTracker</span></code></td>
+</tr>
+<tr>
+<td>
 <h4><a href="-chunk-queue/index.html">ChunkQueue</a></h4>
 </td>
 <td>
@@ -26,6 +33,13 @@
 <td>
 <p>Send chunks for a given device to Memfault's web services.</p>
 <code><span class="keyword">class </span><span class="identifier">ChunkSender</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-exponential-backoff/index.html">ExponentialBackoff</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ExponentialBackoff</span></code></td>
 </tr>
 <tr>
 <td>

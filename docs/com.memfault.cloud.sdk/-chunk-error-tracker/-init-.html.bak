@@ -1,0 +1,14 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ChunkErrorTracker.<init> - sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="index.html">ChunkErrorTracker</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.memfault.cloud.sdk.ChunkErrorTracker$&lt;init&gt;(com.memfault.cloud.sdk.ExponentialBackoff, kotlin.Function0((kotlin.Long)))"></a>
+<code><span class="identifier">ChunkErrorTracker</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.ChunkErrorTracker$<init>(com.memfault.cloud.sdk.ExponentialBackoff, kotlin.Function0((kotlin.Long)))/backoff">backoff</span><span class="symbol">:</span>&nbsp;<a href="../-exponential-backoff/index.html"><span class="identifier">ExponentialBackoff</span></a>&nbsp;<span class="symbol">=</span>&nbsp;ExponentialBackoff(1.0, maxExponent = 10)<span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.ChunkErrorTracker$<init>(com.memfault.cloud.sdk.ExponentialBackoff, kotlin.Function0((kotlin.Long)))/getElapsedRealtimeMillis">getElapsedRealtimeMillis</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a>&nbsp;<span class="symbol">=</span>&nbsp;::elapsedRealtime<span class="symbol">)</span></code>
+</BODY>
+</HTML>

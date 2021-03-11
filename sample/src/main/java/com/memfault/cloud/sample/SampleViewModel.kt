@@ -61,13 +61,16 @@ class SampleViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun getLatestRelease(serial: String) =
-        memfaultCloud.getLatestRelease(deviceInfo(serial), callback = object : GetLatestReleaseCallback {
-            override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) = logAndShowToast("Update available")
+        memfaultCloud.getLatestRelease(
+            deviceInfo(serial),
+            callback = object : GetLatestReleaseCallback {
+                override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) = logAndShowToast("Update available")
 
-            override fun onUpToDate() = logAndShowToast("Release up to date")
+                override fun onUpToDate() = logAndShowToast("Release up to date")
 
-            override fun onError(e: Exception) = logAndShowToast("Failed to get latest release", e)
-        })
+                override fun onError(e: Exception) = logAndShowToast("Failed to get latest release", e)
+            }
+        )
 
     @ExperimentalUnsignedTypes
     fun addChunks(serial: String) {
@@ -77,12 +80,11 @@ class SampleViewModel(application: Application) : AndroidViewModel(application) 
 
     fun sendChunks(serial: String) = chunkSender(serial).send(
         callback = object : SendChunksCallback {
-            override fun onError(e: Exception, sent: Int) = logAndShowToast("Error: sent $sent", e)
-
             override fun onQueueEmpty(sent: Int) = logAndShowToast("Success, queue empty: sent $sent")
 
             // Schedule a re-try, e.g. using https://developer.android.com/reference/android/app/job/JobScheduler
-            override fun onRetryAfterDelay(delay: Long, sent: Int) = logAndShowToast("Retry: delay $delay sent $sent")
+            override fun onRetryAfterDelay(delay: Long, sent: Int, exception: Exception) =
+                logAndShowToast("Retry: delay $delay sent $sent", exception)
         }
     )
 
