@@ -10,7 +10,7 @@ The `sample/` directory contains a very basic Android application that
 demonstrates the functionality of this library. Feedback from user interactions
 is logged to LogCat and displayed as Toasts.
 
-Before building the app, make sure to update the Project API key in
+Before building the app, make sure to update the Project key in
 `SampleViewModel.kt`.
 
 ### Adding the SDK to your project
@@ -19,7 +19,7 @@ Add the library to your application's `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.memfault.cloud:cloud-android:2.0.0'
+  implementation 'com.memfault.cloud:cloud-android:2.0.1'
 }
 ```
 

@@ -4,6 +4,7 @@ import android.net.Uri
 import java.io.Closeable
 import java.io.InputStream
 import java.io.OutputStream
+import java.net.HttpURLConnection
 import java.util.Locale
 import java.util.UUID
 import okio.Buffer
@@ -102,15 +103,24 @@ class HttpHeaderMap(private val mixedCaseHeaders: Map<String, String>) : Map<Str
         get() = headersByLowercaseKey.keys
 }
 
+/**
+ * A simpler wrapper interface, to avoid polluting the [HttpResponse] API with a [HttpURLConnection].
+ */
+interface CloseableConnection {
+    fun disconnect()
+}
+
 data class HttpResponse(
     val code: Int,
     val message: String,
     val body: InputStream,
-    val headers: HttpHeaderMap
+    val headers: HttpHeaderMap,
+    val connection: CloseableConnection
 ) : Closeable {
     override fun close() {
         try {
             body.close()
+            connection.disconnect()
         } catch (rethrown: RuntimeException) {
             throw rethrown
         } catch (_: Exception) {

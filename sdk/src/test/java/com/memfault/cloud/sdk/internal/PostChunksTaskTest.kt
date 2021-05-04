@@ -64,7 +64,7 @@ class PostChunksTaskTest {
     fun postSuccess() {
         every {
             memfaultHttpApi.postChunks(any(), any())
-        } returns HttpResponse(202, "Accepted", "".byteInputStream(), HttpHeaderMap(emptyMap()))
+        } returns HttpResponse(202, "Accepted", "".byteInputStream(), HttpHeaderMap(emptyMap()), DummyConnection)
 
         addChunks(1)
         task.run()
@@ -81,7 +81,7 @@ class PostChunksTaskTest {
     fun postUpToMaxChunks() {
         every {
             memfaultHttpApi.postChunks(any(), any())
-        } returns HttpResponse(202, "Accepted", "".byteInputStream(), HttpHeaderMap(emptyMap()))
+        } returns HttpResponse(202, "Accepted", "".byteInputStream(), HttpHeaderMap(emptyMap()), DummyConnection)
 
         addChunks(TEST_MAX_CHUNKS_PER_REQUEST + 1)
         task.run()
@@ -101,7 +101,7 @@ class PostChunksTaskTest {
             memfaultHttpApi.postChunks(any(), any())
         } returns HttpResponse(
             429, "Too Many Requests", "".byteInputStream(),
-            HttpHeaderMap(mapOf("retry-after" to "123"))
+            HttpHeaderMap(mapOf("retry-after" to "123")), DummyConnection
         )
 
         addChunks(1)
@@ -118,7 +118,7 @@ class PostChunksTaskTest {
         every {
             memfaultHttpApi.postChunks(any(), any())
         } returns HttpResponse(
-            429, "Too Many Requests", "".byteInputStream(), HttpHeaderMap(emptyMap())
+            429, "Too Many Requests", "".byteInputStream(), HttpHeaderMap(emptyMap()), DummyConnection
         )
 
         addChunks(1)
@@ -128,5 +128,9 @@ class PostChunksTaskTest {
         verify(exactly = 0) { callback.onQueueEmpty(any()) }
 
         assertEquals(DEFAULT_RETRY_BASE_DELAY_SECONDS, errorTracker.nextDelay())
+    }
+
+    private object DummyConnection : CloseableConnection {
+        override fun disconnect() = Unit
     }
 }

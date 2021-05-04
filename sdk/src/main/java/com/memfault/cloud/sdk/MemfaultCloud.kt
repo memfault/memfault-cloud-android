@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
  *
  * ```kotlin
  * val memfault = MemfaultCloud.Builder()
- *   .setApiKey(PROJECT_API_KEY)
+ *   .setApiKey(PROJECT_KEY)
  *   .build()
  * ```
  *
@@ -32,11 +32,11 @@ import java.util.concurrent.TimeUnit
  *
  * ```java
  * final Memfault memfault = new Memfault.Builder()
- *    .setApiKey(PROJECT_API_KEY)
+ *    .setApiKey(PROJECT_KEY)
  *    .build();
  * ```
  *
- * To find your `PROJECT_API_KEY`, log in to [https://app.memfault.com/] and navigate to Settings.
+ * To find your `PROJECT_KEY`, log in to [https://app.memfault.com/] and navigate to Settings.
  *
  * ## Getting the Latest Release
  *
@@ -150,7 +150,7 @@ class MemfaultCloud internal constructor(
         var baseChunksUrl = BuildConfig.MEMFAULT_BASE_CHUNKS_URL
 
         /**
-         * Provide the project API key.
+         * Provide the project key.
          */
         fun setApiKey(apiKey: String): Builder {
             this.apiKey = apiKey

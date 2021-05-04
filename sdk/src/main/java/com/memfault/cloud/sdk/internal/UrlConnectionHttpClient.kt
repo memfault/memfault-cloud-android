@@ -65,14 +65,18 @@ internal class UrlConnectionHttpClient : HttpClient {
                     responseCode,
                     responseMessage,
                     responseBodyStream,
-                    HttpHeaderMap(formattedResponseHeaders)
+                    HttpHeaderMap(formattedResponseHeaders),
+                    object : CloseableConnection {
+                        override fun disconnect() {
+                            urlConnection.disconnect()
+                        }
+                    }
                 )
             }
         } catch (e: Exception) {
             Logger.e("$method failed $urlString", e)
-        } finally {
-            urlConnection?.disconnect()
         }
+        urlConnection?.disconnect()
         return null
     }
 }

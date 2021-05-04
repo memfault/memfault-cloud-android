@@ -1,5 +1,11 @@
 # MemfaultCloud Android Changelog
 
+## v2.0.1 - May 3, 2021
+
+#### :chart_with_upwards_trend: Improvements
+
+- Fixed a crash when checking for Android OTA updates using `getLatestRelease`.
+
 ## v2.0.0 - December 28, 2020
 
 #### :boom: Breaking Changes

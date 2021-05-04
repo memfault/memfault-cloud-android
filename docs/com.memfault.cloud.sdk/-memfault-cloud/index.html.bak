@@ -15,15 +15,15 @@
 application. Use the <a href="-builder/index.html">Builder</a> to create an instance.</p>
 <p>Kotlin:</p>
 <pre><code class="lang-kotlin">val memfault = MemfaultCloud.Builder()
-  .setApiKey(PROJECT_API_KEY)
+  .setApiKey(PROJECT_KEY)
   .build()
 </code></pre>
 <p>Java:</p>
 <pre><code class="lang-java">final Memfault memfault = new Memfault.Builder()
-   .setApiKey(PROJECT_API_KEY)
+   .setApiKey(PROJECT_KEY)
    .build();
 </code></pre>
-<p>To find your <code>PROJECT_API_KEY</code>, log in to <a href="https://app.memfault.com/">https://app.memfault.com/</a> and navigate to Settings.</p>
+<p>To find your <code>PROJECT_KEY</code>, log in to <a href="https://app.memfault.com/">https://app.memfault.com/</a> and navigate to Settings.</p>
 <h2>Getting the Latest Release</h2>
 <p>You can check to see whether there's a new update for a particular device with
 <a href="get-latest-release.html">MemfaultCloud.getLatestRelease</a>:</p>
