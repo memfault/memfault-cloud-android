@@ -12,4 +12,11 @@ class HttpHeaderMapTest {
         assertEquals(setOf("retry-after"), headers.keys)
         assertEquals(mapOf("retry-after" to "100").entries, headers.entries)
     }
+
+    @Test
+    fun nullKey() {
+        val headers = HttpHeaderMap(mapOf(null to "HTTP/1.1 200 OK"))
+        assertEquals(true, headers.containsKey(null))
+        assertEquals("HTTP/1.1 200 OK", headers[null])
+    }
 }

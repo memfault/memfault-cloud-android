@@ -20,7 +20,7 @@ is logged to LogCat and displayed as Toasts.</p>
 <h3>Adding the SDK to your project</h3>
 <p>Add the library to your application's <code>build.gradle</code>:</p>
 <pre><code class="lang-groovy">dependencies {
-  implementation 'com.memfault.cloud:cloud-android:2.0.1'
+  implementation 'com.memfault.cloud:cloud-android:2.0.2'
 }
 </code></pre>
 <p>The artifact is hosted on the
@@ -46,7 +46,7 @@ device.</p>
 <h4>Uploading Chunks</h4>
 <p>The Memfault Firmware SDK packetizes data to be sent to Memfault's cloud into
 "chunks". See
-<a href="https://docs.memfault.com/docs/embedded/data-from-firmware-to-the-cloud">this tutorial for details</a>.</p>
+<a href="https://docs.memfault.com/docs/mcu/data-from-firmware-to-the-cloud">this tutorial for details</a>.</p>
 <p>Once you have established sending chunks from your device to the Android app,
 use the
 <a href="https://memfault.github.io/memfault-cloud-android/com.memfault.cloud.sdk/-chunk-sender/index.html">ChunkSender</a>

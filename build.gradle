@@ -41,7 +41,7 @@ buildscript {
         'test': [
             'kotlin': [
                 'common': 'org.jetbrains.kotlin:kotlin-test-common',
-                'jdk': 'org.jetbrains.kotlin:kotlin-test-junit',
+                'jdk': 'org.jetbrains.kotlin:kotlin-test-junit5',
             ],
             'mockk': "io.mockk:mockk:${versions.mockk}",
             'json': "org.json:json:${versions.json}",

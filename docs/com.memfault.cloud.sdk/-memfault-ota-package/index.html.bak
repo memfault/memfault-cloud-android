@@ -19,7 +19,7 @@
 </td>
 <td>
 <p>An OTA package, returned by Memfault's server for a specific <a href="../-memfault-device-info/index.html">MemfaultDeviceInfo</a>.</p>
-<code><span class="identifier">MemfaultOtaPackage</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String)/releaseNotes">releaseNotes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String)/appVersion">appVersion</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code></td>
+<code><span class="identifier">MemfaultOtaPackage</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/releaseNotes">releaseNotes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/appVersion">appVersion</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultOtaPackage$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/md5">md5</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -39,6 +39,13 @@
 </td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">location</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="md5.html">md5</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">md5</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>

@@ -52,7 +52,7 @@ internal class UrlConnectionHttpClient : HttpClient {
             // This starts the connection
             val responseCode = urlConnection.responseCode
             val responseMessage = urlConnection.responseMessage
-            val rawHeaders = urlConnection.headerFields as Map<String, List<String>>
+            val rawHeaders = urlConnection.headerFields as Map<String?, List<String>>
 
             when {
                 (responseCode > 299) -> urlConnection.errorStream

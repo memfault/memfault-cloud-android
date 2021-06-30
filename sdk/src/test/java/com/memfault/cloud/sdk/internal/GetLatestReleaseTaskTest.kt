@@ -68,6 +68,7 @@ internal class GetLatestReleaseTaskTest {
         assertEquals(LOCATION, otaPackage.location)
         assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
         assertEquals(APP_VERSION, otaPackage.appVersion)
+        assertEquals(MD5, otaPackage.md5)
     }
 
     @Test
@@ -86,6 +87,7 @@ https://bar.s3.amazonaws.com/foo
 """.replace("\n", "")
         const val RELEASE_NOTES = ""
         const val APP_VERSION = "1.0.0"
+        const val MD5 = "43c821cfb039f59aa81078f60885abe4"
         const val RESPONSE = """
 {
     "artifacts": [

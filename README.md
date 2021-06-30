@@ -19,7 +19,7 @@ Add the library to your application's `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.memfault.cloud:cloud-android:2.0.1'
+  implementation 'com.memfault.cloud:cloud-android:2.0.2'
 }
 ```
 
@@ -54,7 +54,7 @@ device.
 
 The Memfault Firmware SDK packetizes data to be sent to Memfault's cloud into
 "chunks". See
-[this tutorial for details](https://docs.memfault.com/docs/embedded/data-from-firmware-to-the-cloud).
+[this tutorial for details](https://docs.memfault.com/docs/mcu/data-from-firmware-to-the-cloud).
 
 Once you have established sending chunks from your device to the Android app,
 use the

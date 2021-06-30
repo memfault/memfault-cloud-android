@@ -87,19 +87,28 @@ data class MixedMultipartBody(
     override fun contentLength(): Int = totalContentLength
 }
 
-class HttpHeaderMap(private val mixedCaseHeaders: Map<String, String>) : Map<String, String> by mixedCaseHeaders {
-    private val headersByLowercaseKey by lazy { mixedCaseHeaders.mapKeys { it.key.toLowerCase(Locale.ROOT) } }
+// NB: While `getHeaderFields` claims to return `Map<String, String>` it is expected
+// to contain a `null` key if it comes from the cache (containing the status code):
+//
+// null => "HTTP/1.1 200 OK"
+//
+// See:
+// - https://issuetracker.google.com/issues/37032975
+// - https://github.com/square/okhttp/issues/1523
+// - https://developer.android.com/reference/java/net/CacheResponse.html#getHeaders()
+class HttpHeaderMap(private val mixedCaseHeaders: Map<String?, String>) : Map<String?, String> by mixedCaseHeaders {
+    private val headersByLowercaseKey by lazy { mixedCaseHeaders.mapKeys { it.key?.toLowerCase(Locale.ROOT) } }
 
-    override fun containsKey(key: String) =
-        headersByLowercaseKey.containsKey(key.toLowerCase(Locale.ROOT))
+    override fun containsKey(key: String?) =
+        headersByLowercaseKey.containsKey(key?.toLowerCase(Locale.ROOT))
 
-    override fun get(key: String): String? =
-        headersByLowercaseKey.get(key.toLowerCase(Locale.ROOT))
+    override fun get(key: String?): String? =
+        headersByLowercaseKey.get(key?.toLowerCase(Locale.ROOT))
 
-    override val entries: Set<Map.Entry<String, String>>
+    override val entries: Set<Map.Entry<String?, String>>
         get() = headersByLowercaseKey.entries
 
-    override val keys: Set<String>
+    override val keys: Set<String?>
         get() = headersByLowercaseKey.keys
 }
 

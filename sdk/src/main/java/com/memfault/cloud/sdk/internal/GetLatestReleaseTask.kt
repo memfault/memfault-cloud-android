@@ -58,13 +58,15 @@ class GetLatestReleaseTask internal constructor(
         private const val URL = "url"
         private const val RELEASE_NOTES = "notes"
         private const val APP_VERSION = "version"
+        private const val MD5 = "md5"
 
         internal fun jsonToOtaPackage(jsonObject: JSONObject): MemfaultOtaPackage {
             val artifactsObject = jsonObject.getJSONArray(ARTIFACTS).getJSONObject(0)
             val url = artifactsObject.getString(URL)
             val releaseNotes = jsonObject.getString(RELEASE_NOTES)
             val appVersion = jsonObject.getString(APP_VERSION)
-            return MemfaultOtaPackage(url, releaseNotes, appVersion)
+            val md5 = artifactsObject.getString(MD5)
+            return MemfaultOtaPackage(url, releaseNotes, appVersion, md5)
         }
     }
 }
