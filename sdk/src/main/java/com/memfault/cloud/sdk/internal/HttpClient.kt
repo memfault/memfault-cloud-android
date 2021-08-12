@@ -97,13 +97,13 @@ data class MixedMultipartBody(
 // - https://github.com/square/okhttp/issues/1523
 // - https://developer.android.com/reference/java/net/CacheResponse.html#getHeaders()
 class HttpHeaderMap(private val mixedCaseHeaders: Map<String?, String>) : Map<String?, String> by mixedCaseHeaders {
-    private val headersByLowercaseKey by lazy { mixedCaseHeaders.mapKeys { it.key?.toLowerCase(Locale.ROOT) } }
+    private val headersByLowercaseKey by lazy { mixedCaseHeaders.mapKeys { it.key?.lowercase(Locale.ROOT) } }
 
     override fun containsKey(key: String?) =
-        headersByLowercaseKey.containsKey(key?.toLowerCase(Locale.ROOT))
+        headersByLowercaseKey.containsKey(key?.lowercase(Locale.ROOT))
 
     override fun get(key: String?): String? =
-        headersByLowercaseKey.get(key?.toLowerCase(Locale.ROOT))
+        headersByLowercaseKey.get(key?.lowercase(Locale.ROOT))
 
     override val entries: Set<Map.Entry<String?, String>>
         get() = headersByLowercaseKey.entries

@@ -59,6 +59,7 @@ class GetLatestReleaseTask internal constructor(
         private const val RELEASE_NOTES = "notes"
         private const val APP_VERSION = "version"
         private const val MD5 = "md5"
+        private const val EXTRA_INFO = "extra_info"
 
         internal fun jsonToOtaPackage(jsonObject: JSONObject): MemfaultOtaPackage {
             val artifactsObject = jsonObject.getJSONArray(ARTIFACTS).getJSONObject(0)
@@ -66,7 +67,18 @@ class GetLatestReleaseTask internal constructor(
             val releaseNotes = jsonObject.getString(RELEASE_NOTES)
             val appVersion = jsonObject.getString(APP_VERSION)
             val md5 = artifactsObject.getString(MD5)
-            return MemfaultOtaPackage(url, releaseNotes, appVersion, md5)
+            val extraInfo = extraInfoToMap(artifactsObject)
+
+            return MemfaultOtaPackage(url, releaseNotes, appVersion, md5, extraInfo)
+        }
+
+        private fun extraInfoToMap(artifactsObject: JSONObject): Map<String, String> = try {
+            val extraInfoObj = artifactsObject.getJSONObject(EXTRA_INFO)
+            extraInfoObj.keys().asSequence().map {
+                it to extraInfoObj.getString(it)
+            }.toMap()
+        } catch (e: JSONException) {
+            emptyMap()
         }
     }
 }

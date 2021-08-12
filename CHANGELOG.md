@@ -1,10 +1,17 @@
 # MemfaultCloud Android Changelog
 
+## v2.0.3 - August 12, 2021
+
+#### :chart_with_upwards_trend: Improvements
+
+- Expose `extra_info` for OTA artifacts.
+
 ## v2.0.2 - June 30, 2021
 
 #### :chart_with_upwards_trend: Improvements
 
 - Fixed a crash when using `ChunkSender`.
+- Expose the MD5 for OTA artifacts.
 
 ## v2.0.1 - May 3, 2021
 

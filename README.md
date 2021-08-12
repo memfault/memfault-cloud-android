@@ -19,7 +19,7 @@ Add the library to your application's `build.gradle`:
 
 ```groovy
 dependencies {
-  implementation 'com.memfault.cloud:cloud-android:2.0.2'
+  implementation 'com.memfault.cloud:cloud-android:2.0.3'
 }
 ```
 
@@ -32,7 +32,6 @@ sample app's root `build.gradle` for an example.
 repositories {
    mavenCentral()
    google()
-   jcenter()
 }
 ```
 

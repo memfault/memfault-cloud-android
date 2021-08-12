@@ -69,6 +69,18 @@ internal class GetLatestReleaseTaskTest {
         assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
         assertEquals(APP_VERSION, otaPackage.appVersion)
         assertEquals(MD5, otaPackage.md5)
+        assertEquals(emptyMap(), otaPackage.extraInfo)
+    }
+
+    @Test
+    fun jsonToOtaPackage_createdFromValidResponseWithExtraInfo() {
+        val otaPackage =
+            GetLatestReleaseTask.jsonToOtaPackage(JSON_OBJECT_WITH_EXTRA_INFO)
+        assertEquals(LOCATION, otaPackage.location)
+        assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
+        assertEquals(APP_VERSION, otaPackage.appVersion)
+        assertEquals(MD5, otaPackage.md5)
+        assertEquals(EXTRA_INFO, otaPackage.extraInfo)
     }
 
     @Test
@@ -88,6 +100,10 @@ https://bar.s3.amazonaws.com/foo
         const val RELEASE_NOTES = ""
         const val APP_VERSION = "1.0.0"
         const val MD5 = "43c821cfb039f59aa81078f60885abe4"
+        val EXTRA_INFO = mapOf(
+            "meta" to "data",
+            "meta2" to "data2"
+        )
         const val RESPONSE = """
 {
     "artifacts": [
@@ -100,7 +116,8 @@ https://bar.s3.amazonaws.com/foo
             "md5": "43c821cfb039f59aa81078f60885abe4",
             "type": "firmware",
             "updated_date": "2019-05-22T21:43:20.360850+00:00",
-            "url": "https://bar.s3.amazonaws.com/foo"
+            "url": "https://bar.s3.amazonaws.com/foo",
+            "extra_info": null
         }
     ],
     "count_devices": 1,
@@ -115,6 +132,19 @@ https://bar.s3.amazonaws.com/foo
 }
 """
         val JSON_OBJECT = JSONObject(RESPONSE)
+        val JSON_OBJECT_WITH_EXTRA_INFO = addExtraInfo(JSONObject(RESPONSE))
+
+        private fun addExtraInfo(
+            obj: JSONObject,
+            extraInfoMap: Map<String, String> = EXTRA_INFO
+        ) = obj.apply {
+            val extraInfo = JSONObject().apply {
+                extraInfoMap.forEach { (key, value) -> put(key, value) }
+            }
+            getJSONArray("artifacts")
+                .getJSONObject(0)
+                .put("extra_info", extraInfo)
+        }
     }
 
     private val device = MemfaultDeviceInfo(

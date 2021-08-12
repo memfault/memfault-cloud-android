@@ -20,11 +20,12 @@ class SampleActivity : AppCompatActivity() {
         findViewById<Spinner>(R.id.device_spinner).adapter = spinnerAdapter
     }
 
-    fun getLatestRelease(v: View) = viewModel.getLatestRelease(currentSelection())
+    fun getLatestRelease(@Suppress("UNUSED_PARAMETER") v: View) = viewModel.getLatestRelease(currentSelection())
 
-    fun addChunks(v: View) = viewModel.addChunks(currentSelection())
+    @ExperimentalUnsignedTypes
+    fun addChunks(@Suppress("UNUSED_PARAMETER") v: View) = viewModel.addChunks(currentSelection())
 
-    fun sendChunks(v: View) = viewModel.sendChunks(currentSelection())
+    fun sendChunks(@Suppress("UNUSED_PARAMETER") v: View) = viewModel.sendChunks(currentSelection())
 
     private fun currentSelection() =
         this.findViewById<Spinner>(R.id.device_spinner).selectedItem.toString()
