@@ -60,16 +60,25 @@ class GetLatestReleaseTask internal constructor(
         private const val APP_VERSION = "version"
         private const val MD5 = "md5"
         private const val EXTRA_INFO = "extra_info"
+        private const val IS_FORCED = "is_forced"
 
         internal fun jsonToOtaPackage(jsonObject: JSONObject): MemfaultOtaPackage {
             val artifactsObject = jsonObject.getJSONArray(ARTIFACTS).getJSONObject(0)
             val url = artifactsObject.getString(URL)
             val releaseNotes = jsonObject.getString(RELEASE_NOTES)
             val appVersion = jsonObject.getString(APP_VERSION)
+            val isForced = jsonObject.getBooleanOrNull(IS_FORCED)
             val md5 = artifactsObject.getString(MD5)
             val extraInfo = extraInfoToMap(artifactsObject)
 
-            return MemfaultOtaPackage(url, releaseNotes, appVersion, md5, extraInfo)
+            return MemfaultOtaPackage(
+                location = url,
+                releaseNotes = releaseNotes,
+                appVersion = appVersion,
+                md5 = md5,
+                extraInfo = extraInfo,
+                isForced = isForced,
+            )
         }
 
         private fun extraInfoToMap(artifactsObject: JSONObject): Map<String, String> = try {
@@ -81,4 +90,13 @@ class GetLatestReleaseTask internal constructor(
             emptyMap()
         }
     }
+}
+
+/**
+ * There is no nullable boolean getter on JSONObject - add our own.
+ */
+private fun JSONObject.getBooleanOrNull(key: String): Boolean? = try {
+    getBoolean(key)
+} catch (e: JSONException) {
+    null
 }

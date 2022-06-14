@@ -8,5 +8,6 @@ data class MemfaultOtaPackage(
     val releaseNotes: String,
     val appVersion: String,
     val md5: String,
-    val extraInfo: Map<String, String>
+    val extraInfo: Map<String, String>,
+    val isForced: Boolean?,
 )
