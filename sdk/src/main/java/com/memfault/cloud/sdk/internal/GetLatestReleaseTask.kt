@@ -39,7 +39,7 @@ class GetLatestReleaseTask internal constructor(
                 throw JSONException("Empty response body")
             }
             val jsonObject = JSONObject(body)
-            val otaPackage = jsonToOtaPackage(jsonObject)
+            val otaPackage = responseToOtaPackage(jsonObject)
             Runnable { callback.onUpdateAvailable(otaPackage) }
         } catch (e: JSONException) {
             Logger.e("Failed to parse JSON response", e)
@@ -62,21 +62,23 @@ class GetLatestReleaseTask internal constructor(
         private const val EXTRA_INFO = "extra_info"
         private const val IS_FORCED = "is_forced"
 
-        internal fun jsonToOtaPackage(jsonObject: JSONObject): MemfaultOtaPackage {
-            val artifactsObject = jsonObject.getJSONArray(ARTIFACTS).getJSONObject(0)
+        internal fun responseToOtaPackage(responseJson: JSONObject): MemfaultOtaPackage {
+            val artifactsObject = responseJson.getJSONArray(ARTIFACTS).getJSONObject(0)
             val url = artifactsObject.getString(URL)
-            val releaseNotes = jsonObject.getString(RELEASE_NOTES)
-            val appVersion = jsonObject.getString(APP_VERSION)
-            val isForced = jsonObject.getBooleanOrNull(IS_FORCED)
+            val releaseNotes = responseJson.getString(RELEASE_NOTES)
+            val appVersion = responseJson.getString(APP_VERSION)
+            val isForced = responseJson.getBooleanOrNull(IS_FORCED)
             val md5 = artifactsObject.getString(MD5)
-            val extraInfo = extraInfoToMap(artifactsObject)
+            val artifactsExtraInfo = extraInfoToMap(artifactsObject)
+            val releaseExtraInfo = extraInfoToMap(responseJson)
 
             return MemfaultOtaPackage(
                 location = url,
                 releaseNotes = releaseNotes,
                 appVersion = appVersion,
                 md5 = md5,
-                extraInfo = extraInfo,
+                extraInfo = artifactsExtraInfo,
+                releaseExtraInfo = releaseExtraInfo,
                 isForced = isForced,
             )
         }
