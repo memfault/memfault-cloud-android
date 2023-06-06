@@ -62,9 +62,9 @@ internal class GetLatestReleaseTaskTest {
     }
 
     @Test
-    fun jsonToOtaPackage_createdFromValidResponse() {
+    fun responseToOtaPackage_createdFromValidResponse() {
         val otaPackage =
-            GetLatestReleaseTask.jsonToOtaPackage(JSON_OBJECT)
+            GetLatestReleaseTask.responseToOtaPackage(JSON_OBJECT)
         assertEquals(LOCATION, otaPackage.location)
         assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
         assertEquals(APP_VERSION, otaPackage.appVersion)
@@ -73,9 +73,9 @@ internal class GetLatestReleaseTaskTest {
     }
 
     @Test
-    fun jsonToOtaPackage_createdFromValidResponseWithExtraInfo() {
+    fun responseToOtaPackage_createdFromValidResponseWithExtraInfo() {
         val otaPackage =
-            GetLatestReleaseTask.jsonToOtaPackage(JSON_OBJECT_WITH_EXTRA_INFO)
+            GetLatestReleaseTask.responseToOtaPackage(JSON_OBJECT_WITH_EXTRA_INFO)
         assertEquals(LOCATION, otaPackage.location)
         assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
         assertEquals(APP_VERSION, otaPackage.appVersion)
@@ -84,9 +84,9 @@ internal class GetLatestReleaseTaskTest {
     }
 
     @Test
-    fun jsonToOtaPackage_throwsWithEmptyJson() {
+    fun responseToOtaPackage_throwsWithEmptyJson() {
         try {
-            GetLatestReleaseTask.jsonToOtaPackage(JSONObject())
+            GetLatestReleaseTask.responseToOtaPackage(JSONObject())
         } catch (e: JSONException) {
             return
         }
@@ -117,13 +117,15 @@ https://bar.s3.amazonaws.com/foo
             "type": "firmware",
             "updated_date": "2019-05-22T21:43:20.360850+00:00",
             "url": "https://bar.s3.amazonaws.com/foo",
-            "extra_info": null
+            "extra_info": null,
+            "file_size": 42
         }
     ],
     "count_devices": 1,
     "created_date": "2019-04-28T07:47:07.840855+00:00",
     "extra_info": null,
     "id": 37,
+    "is_delta": false,
     "min_version": "",
     "notes": "",
     "revision": "",

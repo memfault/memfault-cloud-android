@@ -1,5 +1,11 @@
 # MemfaultCloud Android Changelog
 
+## v2.0.5 - June 6, 2023
+
+#### :chart_with_upwards_trend: Improvements
+
+- Differentiate between the release's and OTA artifact's `extra_info`.
+
 ## v2.0.3 - August 12, 2021
 
 #### :chart_with_upwards_trend: Improvements

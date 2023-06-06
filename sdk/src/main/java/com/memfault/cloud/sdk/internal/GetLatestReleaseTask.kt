@@ -39,7 +39,7 @@ class GetLatestReleaseTask internal constructor(
                 throw JSONException("Empty response body")
             }
             val jsonObject = JSONObject(body)
-            val otaPackage = jsonToOtaPackage(jsonObject)
+            val otaPackage = responseToOtaPackage(jsonObject)
             Runnable { callback.onUpdateAvailable(otaPackage) }
         } catch (e: JSONException) {
             Logger.e("Failed to parse JSON response", e)
@@ -56,28 +56,36 @@ class GetLatestReleaseTask internal constructor(
     companion object {
         private const val ARTIFACTS = "artifacts"
         private const val URL = "url"
+        private const val ARTIFACT_SIZE = "file_size"
         private const val RELEASE_NOTES = "notes"
         private const val APP_VERSION = "version"
         private const val MD5 = "md5"
         private const val EXTRA_INFO = "extra_info"
         private const val IS_FORCED = "is_forced"
+        private const val IS_DELTA = "is_delta"
 
-        internal fun jsonToOtaPackage(jsonObject: JSONObject): MemfaultOtaPackage {
-            val artifactsObject = jsonObject.getJSONArray(ARTIFACTS).getJSONObject(0)
+        internal fun responseToOtaPackage(responseJson: JSONObject): MemfaultOtaPackage {
+            val artifactsObject = responseJson.getJSONArray(ARTIFACTS).getJSONObject(0)
             val url = artifactsObject.getString(URL)
-            val releaseNotes = jsonObject.getString(RELEASE_NOTES)
-            val appVersion = jsonObject.getString(APP_VERSION)
-            val isForced = jsonObject.getBooleanOrNull(IS_FORCED)
+            val releaseNotes = responseJson.getString(RELEASE_NOTES)
+            val appVersion = responseJson.getString(APP_VERSION)
+            val isForced = responseJson.getBooleanOrNull(IS_FORCED)
             val md5 = artifactsObject.getString(MD5)
-            val extraInfo = extraInfoToMap(artifactsObject)
+            val artifactsExtraInfo = extraInfoToMap(artifactsObject)
+            val releaseExtraInfo = extraInfoToMap(responseJson)
+            val size = artifactsObject.getLong(ARTIFACT_SIZE)
+            val isDelta = responseJson.getBoolean(IS_DELTA)
 
             return MemfaultOtaPackage(
                 location = url,
                 releaseNotes = releaseNotes,
                 appVersion = appVersion,
                 md5 = md5,
-                extraInfo = extraInfo,
+                artifactExtraInfo = artifactsExtraInfo,
+                releaseExtraInfo = releaseExtraInfo,
                 isForced = isForced,
+                size = size,
+                isDelta = isDelta,
             )
         }
 
@@ -95,8 +103,9 @@ class GetLatestReleaseTask internal constructor(
 /**
  * There is no nullable boolean getter on JSONObject - add our own.
  */
-private fun JSONObject.getBooleanOrNull(key: String): Boolean? = try {
-    getBoolean(key)
-} catch (e: JSONException) {
-    null
-}
+private fun JSONObject.getBooleanOrNull(key: String): Boolean? =
+    if (has(key) && !isNull(key)) {
+        getBoolean(key)
+    } else {
+        null
+    }
