@@ -6,6 +6,12 @@
 
 - Differentiate between the release's and OTA artifact's `extra_info`.
 
+## v2.0.4 - June 14, 2022
+
+#### :chart_with_upwards_trend: Improvements
+
+- Expose `is_forced` for OTA artifacts.
+
 ## v2.0.3 - August 12, 2021
 
 #### :chart_with_upwards_trend: Improvements
