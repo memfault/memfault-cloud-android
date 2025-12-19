@@ -6,7 +6,7 @@ class ExponentialBackoff(
     var baseDelay: Double,
     val maxExponent: Int,
     initialExponent: Int = NO_DELAY_EXPONENT,
-    val factor: Double = 2.0
+    val factor: Double = 2.0,
 ) {
     init {
         require(baseDelay > 0.0)
@@ -31,7 +31,7 @@ class ExponentialBackoff(
             baseDelay = baseDelay,
             maxExponent = maxExponent,
             initialExponent = exponent,
-            factor = factor
+            factor = factor,
         )
 }
 

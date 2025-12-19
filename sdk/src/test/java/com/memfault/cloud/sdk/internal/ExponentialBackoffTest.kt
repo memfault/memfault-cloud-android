@@ -1,10 +1,10 @@
 package com.memfault.cloud.sdk.internal
 
 import com.memfault.cloud.sdk.ExponentialBackoff
-import kotlin.math.pow
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.math.pow
 
 private const val BASE_DELAY = 10.0
 private const val FACTOR = 2.0

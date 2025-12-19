@@ -2,8 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.memfault.cloud.sample'
     compileSdkVersion versions.compileSdk
-    buildToolsVersion "30.0.3"
+
+    buildFeatures {
+        buildConfig true
+    }
 
     defaultConfig {
         applicationId "com.memfault.cloud.sample"
@@ -27,6 +31,10 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 

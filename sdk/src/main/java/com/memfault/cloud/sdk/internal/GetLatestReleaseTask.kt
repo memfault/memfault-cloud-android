@@ -3,12 +3,12 @@ package com.memfault.cloud.sdk.internal
 import com.memfault.cloud.sdk.GetLatestReleaseCallback
 import com.memfault.cloud.sdk.MemfaultDeviceInfo
 import com.memfault.cloud.sdk.MemfaultOtaPackage
-import java.io.IOException
-import java.util.concurrent.Executor
 import okio.buffer
 import okio.source
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
+import java.util.concurrent.Executor
 
 private const val HTTP_NO_CONTENT = 204
 
@@ -16,9 +16,8 @@ class GetLatestReleaseTask internal constructor(
     private val deviceInfo: MemfaultDeviceInfo,
     private val executor: Executor,
     private val memfaultHttpApi: MemfaultHttpApi,
-    private val callback: GetLatestReleaseCallback
+    private val callback: GetLatestReleaseCallback,
 ) : Runnable {
-
     internal fun createCallbackTaskFromResponse(response: HttpResponse?): Runnable {
         when {
             (response == null) -> return Runnable {
@@ -47,11 +46,12 @@ class GetLatestReleaseTask internal constructor(
         }
     }
 
-    override fun run() = memfaultHttpApi.getLatestRelease(deviceInfo).use {
-        createCallbackTaskFromResponse(it)
-    }.let {
-        executor.execute(it)
-    }
+    override fun run() =
+        memfaultHttpApi.getLatestRelease(deviceInfo).use {
+            createCallbackTaskFromResponse(it)
+        }.let {
+            executor.execute(it)
+        }
 
     companion object {
         private const val ARTIFACTS = "artifacts"
@@ -89,14 +89,15 @@ class GetLatestReleaseTask internal constructor(
             )
         }
 
-        private fun extraInfoToMap(artifactsObject: JSONObject): Map<String, String> = try {
-            val extraInfoObj = artifactsObject.getJSONObject(EXTRA_INFO)
-            extraInfoObj.keys().asSequence().map {
-                it to extraInfoObj.getString(it)
-            }.toMap()
-        } catch (e: JSONException) {
-            emptyMap()
-        }
+        private fun extraInfoToMap(artifactsObject: JSONObject): Map<String, String> =
+            try {
+                val extraInfoObj = artifactsObject.getJSONObject(EXTRA_INFO)
+                extraInfoObj.keys().asSequence().map {
+                    it to extraInfoObj.getString(it)
+                }.toMap()
+            } catch (e: JSONException) {
+                emptyMap()
+            }
     }
 }
 

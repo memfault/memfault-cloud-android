@@ -100,9 +100,8 @@ class MemfaultCloud internal constructor(
     internal val workerThreadExecutor: Executor,
     private val baseApiUrl: String,
     private val baseChunksUrl: String,
-    private val apiKey: String
+    private val apiKey: String,
 ) {
-
     /**
      * Stop and clean up any active tasks.
      *
@@ -160,13 +159,14 @@ class MemfaultCloud internal constructor(
         /**
          * Create the [MemfaultCloud] instance using the configured values.
          */
-        fun build(): MemfaultCloud = MemfaultCloud(
-            mainThreadExecutor = mainThreadExecutor ?: MainThreadExecutor(),
-            workerThreadExecutor = workerThreadExecutor ?: dynamicSingleThreadExecutor(),
-            baseApiUrl = baseApiUrl,
-            baseChunksUrl = baseChunksUrl,
-            apiKey = checkNotNull(apiKey)
-        )
+        fun build(): MemfaultCloud =
+            MemfaultCloud(
+                mainThreadExecutor = mainThreadExecutor ?: MainThreadExecutor(),
+                workerThreadExecutor = workerThreadExecutor ?: dynamicSingleThreadExecutor(),
+                baseApiUrl = baseApiUrl,
+                baseChunksUrl = baseChunksUrl,
+                apiKey = checkNotNull(apiKey),
+            )
     }
 
     /**
@@ -175,20 +175,27 @@ class MemfaultCloud internal constructor(
      * @param deviceInfo the device for which to check for an update.
      * @param callback called when a result has been determined.
      */
-    fun getLatestRelease(deviceInfo: MemfaultDeviceInfo, callback: GetLatestReleaseCallback) {
+    fun getLatestRelease(
+        deviceInfo: MemfaultDeviceInfo,
+        callback: GetLatestReleaseCallback,
+    ) {
         workerThreadExecutor.execute(
             GetLatestReleaseTask(
-                deviceInfo, mainThreadExecutor, buildMemfaultHttpApi(), callback
-            )
+                deviceInfo,
+                mainThreadExecutor,
+                buildMemfaultHttpApi(),
+                callback,
+            ),
         )
     }
 
-    internal fun buildMemfaultHttpApi() = MemfaultHttpApi(
-        httpClient = UrlConnectionHttpClient(),
-        baseApiUrl = baseApiUrl,
-        baseChunksUrl = baseChunksUrl,
-        apiKey = apiKey
-    )
+    internal fun buildMemfaultHttpApi() =
+        MemfaultHttpApi(
+            httpClient = UrlConnectionHttpClient(),
+            baseApiUrl = baseApiUrl,
+            baseChunksUrl = baseChunksUrl,
+            apiKey = apiKey,
+        )
 
     enum class LogLevel(internal val level: Int) {
         NONE(0),
@@ -196,14 +203,19 @@ class MemfaultCloud internal constructor(
         WARN(2),
         INFO(3),
         DEBUG(4),
-        VERBOSE(5)
+        VERBOSE(5),
     }
 
     companion object {
         @JvmStatic
-        internal fun dynamicSingleThreadExecutor(): ExecutorService = ThreadPoolExecutor(
-            0, 1, 5L, TimeUnit.SECONDS, LinkedBlockingQueue<Runnable>()
-        )
+        internal fun dynamicSingleThreadExecutor(): ExecutorService =
+            ThreadPoolExecutor(
+                0,
+                1,
+                5L,
+                TimeUnit.SECONDS,
+                LinkedBlockingQueue<Runnable>(),
+            )
 
         /**
          * Logs at `level` and above will be logged to LogCat.

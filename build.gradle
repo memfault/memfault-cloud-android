@@ -2,23 +2,23 @@
 
 buildscript {
     ext.versions = [
-        'kotlin': '1.5.20',
-        'minSdk': 18,
-        'compileSdk': 30,
-        'appCompat': '1.3.0',
-        'coreKtx': '1.6.0',
-        'constraintLayout': '2.0.4',
-        'dokka': '0.10.1',
-        'androidGradlePlugin': '4.2.2',
-        'json': '20180130',
-        'junit': '5.7.2',
-        'ktlintGradle' : '10.1.0',
+        'kotlin': '2.1.0',
+        'minSdk': 21,
+        'compileSdk': 35,
+        'appCompat': '1.7.0',
+        'coreKtx': '1.15.0',
+        'constraintLayout': '2.2.0',
+        'dokka': '1.9.20',
+        'androidGradlePlugin': '8.7.3',
+        'json': '20240303',
+        'junit': '5.11.4',
+        'ktlintGradle' : '12.1.2',
         'lifecycleExtensions': '2.2.0',
-        'leakCanary': '2.7',
-        'mockk': '1.12.0',
-        'okio': '2.10.0',
+        'leakCanary': '2.14',
+        'mockk': '1.13.13',
+        'okio': '3.9.1',
         'tape': '2.0.0-beta1',
-        'viewmodelKtx': '2.3.1'
+        'viewmodelKtx': '2.8.7'
     ]
     ext.deps = [
         'android': [
@@ -79,7 +79,7 @@ subprojects {
     apply plugin: "org.jlleitschuh.gradle.ktlint"
 
     ktlint {
-        version = "0.41.0"
+        version = "1.0.1"
         android = true
         outputColorName = "RED"
     }

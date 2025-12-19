@@ -5,6 +5,7 @@ import com.memfault.cloud.sdk.MemfaultCloud
 
 object Logger {
     const val TAG = "MFLT-SDK"
+
     @JvmStatic
     var minLevel: MemfaultCloud.LogLevel = MemfaultCloud.LogLevel.NONE
 
@@ -24,22 +25,40 @@ object Logger {
     fun v(message: String) = log(MemfaultCloud.LogLevel.VERBOSE, message)
 
     @JvmStatic
-    fun e(message: String, t: Throwable) = log(MemfaultCloud.LogLevel.ERROR, message, t)
+    fun e(
+        message: String,
+        t: Throwable,
+    ) = log(MemfaultCloud.LogLevel.ERROR, message, t)
 
     @JvmStatic
-    fun w(message: String, t: Throwable) = log(MemfaultCloud.LogLevel.WARN, message, t)
+    fun w(
+        message: String,
+        t: Throwable,
+    ) = log(MemfaultCloud.LogLevel.WARN, message, t)
 
     @JvmStatic
-    fun i(message: String, t: Throwable) = log(MemfaultCloud.LogLevel.INFO, message, t)
+    fun i(
+        message: String,
+        t: Throwable,
+    ) = log(MemfaultCloud.LogLevel.INFO, message, t)
 
     @JvmStatic
-    fun d(message: String, t: Throwable) = log(MemfaultCloud.LogLevel.DEBUG, message, t)
+    fun d(
+        message: String,
+        t: Throwable,
+    ) = log(MemfaultCloud.LogLevel.DEBUG, message, t)
 
     @JvmStatic
-    fun v(message: String, t: Throwable) = log(MemfaultCloud.LogLevel.VERBOSE, message, t)
+    fun v(
+        message: String,
+        t: Throwable,
+    ) = log(MemfaultCloud.LogLevel.VERBOSE, message, t)
 
     @JvmStatic
-    private fun log(level: MemfaultCloud.LogLevel, message: String) {
+    private fun log(
+        level: MemfaultCloud.LogLevel,
+        message: String,
+    ) {
         if (level > minLevel) return
         when (level) {
             MemfaultCloud.LogLevel.ERROR -> Log.e(TAG, message)
@@ -52,7 +71,11 @@ object Logger {
     }
 
     @JvmStatic
-    private fun log(level: MemfaultCloud.LogLevel, message: String, t: Throwable) {
+    private fun log(
+        level: MemfaultCloud.LogLevel,
+        message: String,
+        t: Throwable,
+    ) {
         if (level > minLevel) return
         when (level) {
             MemfaultCloud.LogLevel.ERROR -> Log.e(TAG, message, t)

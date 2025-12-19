@@ -1,5 +1,27 @@
 # MemfaultCloud Android Changelog
 
+## v2.1.0 - December 19, 2025
+
+#### :rocket: Major Update - Modernization
+
+- **Updated Android Gradle Plugin from 4.2.2 to 8.7.3** - Now compatible with AGP 8.x and Kotlin 2.x
+- **Updated Kotlin from 1.5.20 to 2.1.0** - Full support for Kotlin 2.x language features
+- **Updated Gradle from 6.7.1 to 8.11.1** - Required for AGP 8.x support
+- **Updated compileSdk from 30 to 35** - Android 15 support
+- **Updated minSdk from 18 to 21** - Required by modern AndroidX libraries (Android 5.0+)
+- **Modernized all AndroidX dependencies**:
+  - appcompat: 1.3.0 → 1.7.0
+  - core-ktx: 1.6.0 → 1.15.0
+  - constraintlayout: 2.0.4 → 2.2.0
+  - lifecycle-viewmodel-ktx: 2.3.1 → 2.8.7
+  - okio: 2.10.0 → 3.9.1
+  - leakcanary: 2.7 → 2.14
+  - mockk: 1.12.0 → 1.13.13
+- **Added namespace declarations to build.gradle** (required by AGP 8.x)
+- **Removed package attributes from AndroidManifest.xml** (migrated to namespace in build.gradle)
+
+This major update ensures compatibility with modern Android development tools and resolves build failures when using AGP 8.13.2+ and Kotlin 2.3+.
+
 ## v2.0.5 - June 6, 2023
 
 #### :chart_with_upwards_trend: Improvements

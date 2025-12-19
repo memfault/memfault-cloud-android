@@ -12,7 +12,7 @@ internal class PostChunksTask(
     private val chunkQueue: ChunkQueue,
     private val callback: SendChunksCallback,
     private val maxChunksPerRequest: Int,
-    private val errorTracker: ChunkErrorTracker
+    private val errorTracker: ChunkErrorTracker,
 ) : Runnable {
     override fun run() {
         var chunksSent = 0
@@ -47,7 +47,7 @@ internal class PostChunksTask(
                     callback.onRetryAfterDelay(
                         errorTracker.nextDelay() ?: DEFAULT_RETRY_BASE_DELAY_SECONDS,
                         chunksSent,
-                        Exception("Request failed $response")
+                        Exception("Request failed $response"),
                     )
                 }
                 return

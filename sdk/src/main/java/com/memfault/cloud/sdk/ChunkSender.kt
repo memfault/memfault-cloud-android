@@ -45,7 +45,7 @@ class ChunkSender internal constructor(
     private val deviceSerial: String,
     private val chunkQueue: ChunkQueue,
     private var maxChunksPerRequest: Int,
-    private val errorTracker: ChunkErrorTracker
+    private val errorTracker: ChunkErrorTracker,
 ) {
     /**
      * Build a [ChunkSender] instance for a given device.
@@ -100,13 +100,14 @@ class ChunkSender internal constructor(
         /**
          * Create a [ChunkSender] instance using the configured values.
          */
-        fun build(): ChunkSender = ChunkSender(
-            memfaultCloud = checkNotNull(memfaultCloud) { "Memfault API must not be null" },
-            deviceSerial = checkNotNull(deviceSerial) { "Device serial number must not be null" },
-            chunkQueue = chunkQueue ?: TemporaryChunkQueue(),
-            maxChunksPerRequest = maxChunksPerRequest,
-            errorTracker = ChunkErrorTracker()
-        )
+        fun build(): ChunkSender =
+            ChunkSender(
+                memfaultCloud = checkNotNull(memfaultCloud) { "Memfault API must not be null" },
+                deviceSerial = checkNotNull(deviceSerial) { "Device serial number must not be null" },
+                chunkQueue = chunkQueue ?: TemporaryChunkQueue(),
+                maxChunksPerRequest = maxChunksPerRequest,
+                errorTracker = ChunkErrorTracker(),
+            )
     }
 
     /**
@@ -135,8 +136,8 @@ class ChunkSender internal constructor(
                 chunkQueue = chunkQueue,
                 callback = callback,
                 maxChunksPerRequest = maxChunksPerRequest,
-                errorTracker = errorTracker
-            )
+                errorTracker = errorTracker,
+            ),
         )
     }
 }

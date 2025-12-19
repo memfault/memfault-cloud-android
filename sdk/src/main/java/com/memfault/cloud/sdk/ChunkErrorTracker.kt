@@ -5,7 +5,7 @@ import kotlin.math.ceil
 
 class ChunkErrorTracker(
     private var backoff: ExponentialBackoff = ExponentialBackoff(1.0, maxExponent = 10),
-    private val getElapsedRealtimeMillis: () -> Long = ::elapsedRealtime
+    private val getElapsedRealtimeMillis: () -> Long = ::elapsedRealtime,
 ) {
     var baseDelaySeconds: Long
         get() = backoff.baseDelay.toLong()

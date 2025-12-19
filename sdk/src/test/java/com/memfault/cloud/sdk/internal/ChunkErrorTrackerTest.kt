@@ -1,10 +1,10 @@
 package com.memfault.cloud.sdk.internal
 
 import com.memfault.cloud.sdk.ChunkErrorTracker
-import kotlin.test.assertNotNull
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.test.assertNotNull
 
 class ChunkErrorTrackerTest {
     private lateinit var chunkErrorTracker: ChunkErrorTracker
@@ -12,9 +12,10 @@ class ChunkErrorTrackerTest {
 
     @BeforeEach
     fun setUp() {
-        chunkErrorTracker = ChunkErrorTracker {
-            nowMillis
-        }
+        chunkErrorTracker =
+            ChunkErrorTracker {
+                nowMillis
+            }
     }
 
     @Test

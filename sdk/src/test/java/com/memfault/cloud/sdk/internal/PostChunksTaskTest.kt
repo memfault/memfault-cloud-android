@@ -26,15 +26,16 @@ class PostChunksTaskTest {
         chunkQueue = TemporaryChunkQueue()
         callback = mockk(relaxed = true)
         errorTracker = spyk(ChunkErrorTracker(getElapsedRealtimeMillis = { nowMillis }))
-        task = PostChunksTask(
-            memfaultHttpApi = memfaultHttpApi,
-            executor = DirectExecutor(),
-            deviceSerial = "DEVICE_SERIAL",
-            chunkQueue = chunkQueue,
-            callback = callback,
-            maxChunksPerRequest = TEST_MAX_CHUNKS_PER_REQUEST,
-            errorTracker = errorTracker
-        )
+        task =
+            PostChunksTask(
+                memfaultHttpApi = memfaultHttpApi,
+                executor = DirectExecutor(),
+                deviceSerial = "DEVICE_SERIAL",
+                chunkQueue = chunkQueue,
+                callback = callback,
+                maxChunksPerRequest = TEST_MAX_CHUNKS_PER_REQUEST,
+                errorTracker = errorTracker,
+            )
     }
 
     fun addChunks(count: Int) {
@@ -99,10 +100,11 @@ class PostChunksTaskTest {
     fun postFailedWithRetryAfterHeader() {
         every {
             memfaultHttpApi.postChunks(any(), any())
-        } returns HttpResponse(
-            429, "Too Many Requests", "".byteInputStream(),
-            HttpHeaderMap(mapOf("retry-after" to "123")), DummyConnection
-        )
+        } returns
+            HttpResponse(
+                429, "Too Many Requests", "".byteInputStream(),
+                HttpHeaderMap(mapOf("retry-after" to "123")), DummyConnection,
+            )
 
         addChunks(1)
         task.run()
@@ -117,9 +119,10 @@ class PostChunksTaskTest {
     fun postFailedNoRetryAfterHeader() {
         every {
             memfaultHttpApi.postChunks(any(), any())
-        } returns HttpResponse(
-            429, "Too Many Requests", "".byteInputStream(), HttpHeaderMap(emptyMap()), DummyConnection
-        )
+        } returns
+            HttpResponse(
+                429, "Too Many Requests", "".byteInputStream(), HttpHeaderMap(emptyMap()), DummyConnection,
+            )
 
         addChunks(1)
         task.run()

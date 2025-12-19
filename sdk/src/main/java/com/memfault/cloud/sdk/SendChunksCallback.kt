@@ -24,5 +24,9 @@ interface SendChunksCallback : Callback {
      * @param sent the number of chunks successfully sent prior to the busy response.
      * @param exception the error that occurred.
      */
-    fun onRetryAfterDelay(delay: Long, sent: Int, exception: Exception)
+    fun onRetryAfterDelay(
+        delay: Long,
+        sent: Int,
+        exception: Exception,
+    )
 }

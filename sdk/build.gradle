@@ -3,7 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka'
 
 android {
+    namespace 'com.memfault.cloud.sdk'
     compileSdkVersion versions.compileSdk
+
+    buildFeatures {
+        buildConfig true
+    }
 
     defaultConfig {
         minSdkVersion versions.minSdk
@@ -35,6 +40,15 @@ android {
             useJUnitPlatform()
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -49,23 +63,25 @@ dependencies {
     testImplementation deps.test.mockk
 }
 
-dokka {
-    outputDirectory = "$buildDir/docs"
-    outputFormat = 'html'
-    configuration {
-        includes = ['../README.md', '../LICENSE']
-        reportUndocumented = true
-        includeNonPublic = false
-        perPackageOption {
-            prefix = "com.memfault.cloud.sdk.internal"
-            suppress = true
-        }
-        perPackageOption {
-            prefix = "com.memfault.cloud.sdk.BuildConfig"
-            suppress = true
+tasks.withType(org.jetbrains.dokka.gradle.DokkaTask).configureEach {
+    outputDirectory.set(file("$buildDir/docs"))
+
+    dokkaSourceSets {
+        named("main") {
+            includes.from("../README.md", "../LICENSE")
+            reportUndocumented.set(true)
+            includeNonPublic.set(false)
+
+            perPackageOption {
+                matchingRegex.set("com\\.memfault\\.cloud\\.sdk\\.internal.*")
+                suppress.set(true)
+            }
+            perPackageOption {
+                matchingRegex.set("com\\.memfault\\.cloud\\.sdk\\.BuildConfig")
+                suppress.set(true)
+            }
         }
     }
-
 }
 
 apply from: 'gradle-mvn-push.gradle'
