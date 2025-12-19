@@ -6,7 +6,7 @@
 
 - **Updated Android Gradle Plugin from 4.2.2 to 8.7.3** - Now compatible with AGP 8.x and Kotlin 2.x
 - **Updated Kotlin from 1.5.20 to 2.1.0** - Full support for Kotlin 2.x language features
-- **Updated Gradle from 6.7.1 to 8.11.1** - Required for AGP 8.x support
+- **Updated Gradle from 6.7.1 to 9.2.1** - Required for AGP 8.x support
 - **Updated compileSdk from 30 to 35** - Android 15 support
 - **Updated minSdk from 18 to 21** - Required by modern AndroidX libraries (Android 5.0+)
 - **Modernized all AndroidX dependencies**:
@@ -20,7 +20,7 @@
 - **Added namespace declarations to build.gradle** (required by AGP 8.x)
 - **Removed package attributes from AndroidManifest.xml** (migrated to namespace in build.gradle)
 
-This major update ensures compatibility with modern Android development tools and resolves build failures when using AGP 8.13.2+ and Kotlin 2.3+.
+This major update ensures compatibility with modern Android development tools and resolves build failures when using AGP 8.x and Kotlin 2.x.
 
 ## v2.0.5 - June 6, 2023
 
