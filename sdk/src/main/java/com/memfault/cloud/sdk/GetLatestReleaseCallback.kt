@@ -6,7 +6,6 @@ package com.memfault.cloud.sdk
  * All methods are run on the main thread. Only one method will be called.
  */
 interface GetLatestReleaseCallback : Callback {
-
     /**
      * Called when an update is available for the given device.
      *

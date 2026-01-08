@@ -4,7 +4,6 @@ package com.memfault.cloud.sdk
  * An API that allows a [ChunkSender] to queue chunks into batched requests.
  */
 interface ChunkQueue {
-
     /**
      * Enqueue the chunks; return false if not successful.
      */

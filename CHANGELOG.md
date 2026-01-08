@@ -1,5 +1,10 @@
 # MemfaultCloud Android Changelog
 
+## v2.1.0 - January 6, 2026
+
+- Update Android Gradle Plugin to 8.13.2, to [support Kotlin
+  2.3](https://developer.android.com/build/kotlin-support).
+
 ## v2.0.5 - June 6, 2023
 
 #### :chart_with_upwards_trend: Improvements

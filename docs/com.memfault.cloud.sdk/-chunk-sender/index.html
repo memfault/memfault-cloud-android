@@ -1,69 +1,130 @@
-<HTML>
-<HEAD>
-<meta charset="UTF-8">
-<title>ChunkSender - sdk</title>
-<link rel="stylesheet" href="../../style.css">
-</HEAD>
-<BODY>
-<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="./index.html">ChunkSender</a><br/>
-<br/>
-<h1>ChunkSender</h1>
-<code><span class="keyword">class </span><span class="identifier">ChunkSender</span></code>
-<p>Send chunks for a given device to Memfault's web services.</p>
-<p>One chunk sender must be created for each device; all chunk senders can then share
-the same <a href="../-memfault-cloud/index.html">MemfaultCloud</a> instance.</p>
-<h2>Initialization</h2>
-<p>Use the <a href="-builder/index.html">Builder</a> to instantiate a <a href="./index.html">ChunkSender</a>:</p>
-<p>Kotlin:</p>
-<pre><code class="lang-kotlin">val chunkSender = ChunkSender.Builder()
-  .setMemfaultCloud(memfaultCloud)
-  .setDeviceSerialNumber(deviceSerial)
-  .build()
-</code></pre>
-<p>Java:</p>
-<pre><code class="lang-java">final ChunkSender chunkSender = new ChunkSender.Builder()
-  .setMemfaultCloud(memfaultCloud)
-  .setDeviceSerialNumber(deviceSerial)
-  .build()
-</code></pre>
-<h2>Persistent Queuing</h2>
-<p>By default, the <a href="./index.html">ChunkSender</a>'s queue lives in memory. If the application is closed or
-crashes with chunks un-sent, they will be lost.</p>
-<p>If this is an issue for your application, you can provide the <a href="./index.html">ChunkSender</a> with a
-<a href="../-chunk-queue/index.html">ChunkQueue</a> that is persistent.</p>
-<h3>Types</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<h4><a href="-builder/index.html">Builder</a></h4>
-</td>
-<td>
-<p>Build a <a href="./index.html">ChunkSender</a> instance for a given device.</p>
-<code><span class="keyword">class </span><span class="identifier">Builder</span></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<h4><a href="add-chunks.html">addChunks</a></h4>
-</td>
-<td>
-<p>Enqueue the chunks for the given device.</p>
-<code><span class="keyword">fun </span><span class="identifier">addChunks</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.ChunkSender$addChunks(kotlin.collections.List((kotlin.ByteArray)))/chunks">chunks</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
-</tr>
-<tr>
-<td>
-<h4><a href="send.html">send</a></h4>
-</td>
-<td>
-<p>Attempt to drain all chunks for the given device.</p>
-<code><span class="keyword">fun </span><span class="identifier">send</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.ChunkSender$send(com.memfault.cloud.sdk.SendChunksCallback)/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-send-chunks-callback/index.html"><span class="identifier">SendChunksCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-</tbody>
-</table>
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ChunkSender</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>sdk</span>
+            </a>
+    </div>
+    <div>
+    </div>
+    <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":sdk:dokkaHtml/release">androidJvm</button>
+        </div>
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="sdk::com.memfault.cloud.sdk/ChunkSender///PointingToDeclaration//165651098">
+  <div class="breadcrumbs"><a href="../../../index.html">sdk</a><span class="delimiter">/</span><a href="../index.html">com.memfault.cloud.sdk</a><span class="delimiter">/</span><span class="current">ChunkSender</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Chunk</span><wbr></wbr><span><span>Sender</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ChunkSender</a></div><p class="paragraph">Send chunks for a given device to Memfault's web services.</p><p class="paragraph">One chunk sender must be created for each device; all chunk senders can then share the same <a href="../-memfault-cloud/index.html">MemfaultCloud</a> instance.</p><h2 class=""> Initialization</h2><p class="paragraph">Use the <a href="-builder/index.html">Builder</a> to instantiate a <a href="index.html">ChunkSender</a>:</p><p class="paragraph">Kotlin:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val chunkSender = ChunkSender.Builder()<br>  .setMemfaultCloud(memfaultCloud)<br>  .setDeviceSerialNumber(deviceSerial)<br>  .build()</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Java:</p><div class="sample-container"><pre><code class="block lang-java" theme="idea">final ChunkSender chunkSender = new ChunkSender.Builder()<br>  .setMemfaultCloud(memfaultCloud)<br>  .setDeviceSerialNumber(deviceSerial)<br>  .build()</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class=""> Persistent Queuing</h2><p class="paragraph">By default, the <a href="index.html">ChunkSender</a>'s queue lives in memory. If the application is closed or crashes with chunks un-sent, they will be lost.</p><p class="paragraph">If this is an issue for your application, you can provide the <a href="index.html">ChunkSender</a> with a <a href="../-chunk-queue/index.html">ChunkQueue</a> that is persistent.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="657127460%2FClasslikes%2F165651098" anchor-label="Builder" id="657127460%2FClasslikes%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-builder/index.html"><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="657127460%2FClasslikes%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-builder/index.html">Builder</a></div><div class="brief "><p class="paragraph">Build a <a href="index.html">ChunkSender</a> instance for a given device.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1569038043%2FFunctions%2F165651098" anchor-label="addChunks" id="1569038043%2FFunctions%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-chunks.html"><span>add</span><wbr></wbr><span><span>Chunks</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1569038043%2FFunctions%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="add-chunks.html"><span class="token function">addChunks</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">chunks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Enqueue the chunks for the given device.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1486438056%2FFunctions%2F165651098" anchor-label="send" id="1486438056%2FFunctions%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="send.html"><span><span>send</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1486438056%2FFunctions%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="send.html"><span class="token function">send</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">callback<span class="token operator">: </span><a href="../-send-chunks-callback/index.html">SendChunksCallback</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Attempt to drain all chunks for the given device.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2026 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>

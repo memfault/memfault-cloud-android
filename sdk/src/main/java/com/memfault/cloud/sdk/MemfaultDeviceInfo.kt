@@ -7,5 +7,5 @@ data class MemfaultDeviceInfo(
     val deviceSerial: String,
     val hardwareVersion: String,
     val currentVersion: String,
-    val softwareType: String
+    val softwareType: String,
 )

@@ -1,125 +1,160 @@
-<HTML>
-<HEAD>
-<meta charset="UTF-8">
-<title>MemfaultCloud - sdk</title>
-<link rel="stylesheet" href="../../style.css">
-</HEAD>
-<BODY>
-<a href="../../index.html">sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.memfault.cloud.sdk</a>&nbsp;/&nbsp;<a href="./index.html">MemfaultCloud</a><br/>
-<br/>
-<h1>MemfaultCloud</h1>
-<code><span class="keyword">class </span><span class="identifier">MemfaultCloud</span></code>
-<p>The Memfault SDK entrypoint.</p>
-<h2>Initialization</h2>
-<p>We recommend creating only one instance of <a href="./index.html">MemfaultCloud</a> and using it across your entire
-application. Use the <a href="-builder/index.html">Builder</a> to create an instance.</p>
-<p>Kotlin:</p>
-<pre><code class="lang-kotlin">val memfault = MemfaultCloud.Builder()
-  .setApiKey(PROJECT_KEY)
-  .build()
-</code></pre>
-<p>Java:</p>
-<pre><code class="lang-java">final Memfault memfault = new Memfault.Builder()
-   .setApiKey(PROJECT_KEY)
-   .build();
-</code></pre>
-<p>To find your <code>PROJECT_KEY</code>, log in to <a href="https://app.memfault.com/">https://app.memfault.com/</a> and navigate to Settings.</p>
-<h2>Getting the Latest Release</h2>
-<p>You can check to see whether there's a new update for a particular device with
-<a href="get-latest-release.html">MemfaultCloud.getLatestRelease</a>:</p>
-<p>Kotlin:</p>
-<pre><code class="lang-kotlin">memfaultCloud.getLatestRelease(deviceInfo, callback = object : GetLatestReleaseCallback {
-
-  override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) {
-    // There's a new software package
-  }
-
-  override fun onUpToDate() {
-    // Device is up to date, nothing to do!
-  }
-
-  override fun onError(e: Exception) {
-    // There was an error; handle it here
-  }
-})
-</code></pre>
-<p>Java:</p>
-<pre><code class="lang-java">final GetLatestReleaseCallback callback = new GetLatestReleaseCallback() {
-  @Override
-  public void onUpdateAvailable(@NonNull MemfaultOtaPackage otaPackage) {
-    // There's a new software package
-  }
-
-  @Override
-  public void onUpToDate() {
-    // Device is up to date, nothing to do!
-  }
-
-  @Override
-  public void onError(@NonNull Exception e) {
-    // There was an error; handle it here
-  }
-};
-memfaultCloud.getLatestRelease(callback);
-</code></pre>
-<h2>Permissions</h2>
-<p>The SDK requires several permissions in order to implement all functionality. Callers should check for these permissions and,
-if necessary, <a href="https://developer.android.com/training/permissions/requesting">request them</a> from the user.</p>
-<ul><li><a href="https://developer.android.com/training/basics/network-ops/connecting.html">Network</a>: <a href="https://developer.android.com/reference/android/Manifest.permission.html#INTERNET"><code>INTERNET</code></a>; <a href="https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_NETWORK_STATE"><code>ACCESS_NETWORK_STATE</code></a></li>
-</ul>
-<h3>Types</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<h4><a href="-builder/index.html">Builder</a></h4>
-</td>
-<td>
-<p>Build a new <a href="./index.html">MemfaultCloud</a> instance.</p>
-<code><span class="keyword">class </span><span class="identifier">Builder</span></code></td>
-</tr>
-<tr>
-<td>
-<h4><a href="-log-level/index.html">LogLevel</a></h4>
-</td>
-<td>
-<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">LogLevel</span></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<h4><a href="deinit.html">deinit</a></h4>
-</td>
-<td>
-<p>Stop and clean up any active tasks.</p>
-<code><span class="keyword">fun </span><span class="identifier">deinit</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<h4><a href="get-latest-release.html">getLatestRelease</a></h4>
-</td>
-<td>
-<p>Queries Memfault's services to find if a new update is available.</p>
-<code><span class="keyword">fun </span><span class="identifier">getLatestRelease</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultCloud$getLatestRelease(com.memfault.cloud.sdk.MemfaultDeviceInfo, com.memfault.cloud.sdk.GetLatestReleaseCallback)/deviceInfo">deviceInfo</span><span class="symbol">:</span>&nbsp;<a href="../-memfault-device-info/index.html"><span class="identifier">MemfaultDeviceInfo</span></a><span class="symbol">, </span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultCloud$getLatestRelease(com.memfault.cloud.sdk.MemfaultDeviceInfo, com.memfault.cloud.sdk.GetLatestReleaseCallback)/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../-get-latest-release-callback/index.html"><span class="identifier">GetLatestReleaseCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Companion Object Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<h4><a href="set-min-log-level.html">setMinLogLevel</a></h4>
-</td>
-<td>
-<p>Logs at <code>level</code> and above will be logged to LogCat.</p>
-<code><span class="keyword">fun </span><span class="identifier">setMinLogLevel</span><span class="symbol">(</span><span class="identifier" id="com.memfault.cloud.sdk.MemfaultCloud.Companion$setMinLogLevel(com.memfault.cloud.sdk.MemfaultCloud.LogLevel)/level">level</span><span class="symbol">:</span>&nbsp;<span class="identifier">LogLevel</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-</tbody>
-</table>
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>MemfaultCloud</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>sdk</span>
+            </a>
+    </div>
+    <div>
+    </div>
+    <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":sdk:dokkaHtml/release">androidJvm</button>
+        </div>
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="sdk::com.memfault.cloud.sdk/MemfaultCloud///PointingToDeclaration//165651098">
+  <div class="breadcrumbs"><a href="../../../index.html">sdk</a><span class="delimiter">/</span><a href="../index.html">com.memfault.cloud.sdk</a><span class="delimiter">/</span><span class="current">MemfaultCloud</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Memfault</span><wbr></wbr><span><span>Cloud</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">MemfaultCloud</a></div><p class="paragraph">The Memfault SDK entrypoint.</p><h2 class=""> Initialization</h2><p class="paragraph">We recommend creating only one instance of <a href="index.html">MemfaultCloud</a> and using it across your entire application. Use the <a href="-builder/index.html">Builder</a> to create an instance.</p><p class="paragraph">Kotlin:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val memfault = MemfaultCloud.Builder()<br>  .setApiKey(PROJECT_KEY)<br>  .build()</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Java:</p><div class="sample-container"><pre><code class="block lang-java" theme="idea">final Memfault memfault = new Memfault.Builder()<br>   .setApiKey(PROJECT_KEY)<br>   .build();</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">To find your <code class="lang-kotlin">PROJECT_KEY</code>, log in to [https://app.memfault.com/] and navigate to Settings.</p><h2 class=""> Getting the Latest Release</h2><p class="paragraph">You can check to see whether there's a new update for a particular device with <a href="get-latest-release.html">MemfaultCloud.getLatestRelease</a>:</p><p class="paragraph">Kotlin:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">memfaultCloud.getLatestRelease(deviceInfo, callback = object : GetLatestReleaseCallback {<br><br>  override fun onUpdateAvailable(otaPackage: MemfaultOtaPackage) {<br>    // There's a new software package<br>  }<br><br>  override fun onUpToDate() {<br>    // Device is up to date, nothing to do!<br>  }<br><br>  override fun onError(e: Exception) {<br>    // There was an error; handle it here<br>  }<br>})</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Java:</p><div class="sample-container"><pre><code class="block lang-java" theme="idea">final GetLatestReleaseCallback callback = new GetLatestReleaseCallback() {<br>  @Override<br>  public void onUpdateAvailable(@NonNull MemfaultOtaPackage otaPackage) {<br>    // There's a new software package<br>  }<br><br>  @Override<br>  public void onUpToDate() {<br>    // Device is up to date, nothing to do!<br>  }<br><br>  @Override<br>  public void onError(@NonNull Exception e) {<br>    // There was an error; handle it here<br>  }<br>};<br>memfaultCloud.getLatestRelease(callback);</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class=""> Permissions</h2><p class="paragraph">The SDK requires several permissions in order to implement all functionality. Callers should check for these permissions and, if necessary, request them[https://developer.android.com/training/permissions/requesting] from the user.</p><ul><li><p class="paragraph"><a href="https://developer.android.com/training/basics/network-ops/connecting.html">Network</a>: <a href="https://developer.android.com/reference/android/Manifest.permission.html#INTERNET"><code class="lang-kotlin">INTERNET</code></a>; <a href="https://developer.android.com/reference/android/Manifest.permission.html#ACCESS_NETWORK_STATE"><code class="lang-kotlin">ACCESS_NETWORK_STATE</code></a></p></li></ul></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="1182331550%2FClasslikes%2F165651098" anchor-label="Builder" id="1182331550%2FClasslikes%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-builder/index.html"><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1182331550%2FClasslikes%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-builder/index.html">Builder</a></div><div class="brief "><p class="paragraph">Build a new <a href="index.html">MemfaultCloud</a> instance.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1146042803%2FClasslikes%2F165651098" anchor-label="Companion" id="-1146042803%2FClasslikes%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146042803%2FClasslikes%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="785822953%2FClasslikes%2F165651098" anchor-label="LogLevel" id="785822953%2FClasslikes%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-log-level/index.html"><span>Log</span><wbr></wbr><span><span>Level</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="785822953%2FClasslikes%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-log-level/index.html">LogLevel</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-log-level/index.html">MemfaultCloud.LogLevel</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-725722333%2FFunctions%2F165651098" anchor-label="deinit" id="-725722333%2FFunctions%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deinit.html"><span><span>deinit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-725722333%2FFunctions%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="deinit.html"><span class="token function">deinit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Stop and clean up any active tasks.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1297389689%2FFunctions%2F165651098" anchor-label="getLatestRelease" id="1297389689%2FFunctions%2F165651098" data-filterable-set=":sdk:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":sdk:dokkaHtml/release" data-filterable-set=":sdk:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-latest-release.html"><span>get</span><wbr></wbr><span>Latest</span><wbr></wbr><span><span>Release</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1297389689%2FFunctions%2F165651098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":sdk:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-latest-release.html"><span class="token function">getLatestRelease</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deviceInfo<span class="token operator">: </span><a href="../-memfault-device-info/index.html">MemfaultDeviceInfo</a><span class="token punctuation">, </span></span><span class="parameter ">callback<span class="token operator">: </span><a href="../-get-latest-release-callback/index.html">GetLatestReleaseCallback</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Queries Memfault's services to find if a new update is available.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2026 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>

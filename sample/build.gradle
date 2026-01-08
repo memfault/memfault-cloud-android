@@ -2,8 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace = "com.memfault.cloud.sample"
+
     compileSdkVersion versions.compileSdk
-    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.memfault.cloud.sample"
@@ -17,6 +18,18 @@ android {
         buildConfigField "String", "MEMFAULT_PROJECT_API_KEY", "\"$MEMFAULT_PROJECT_API_KEY\""
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs += "-opt-in=kotlin.time.ExperimentalTime"
+        freeCompilerArgs += "-Xjvm-default=all"
+        allWarningsAsErrors = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,8 +38,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        disable 'UsingOnClickInXml', 'NotificationPermission'
     }
 }
 

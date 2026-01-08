@@ -7,17 +7,16 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.Executor
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import org.json.JSONException
-import org.json.JSONObject
 
 internal class GetLatestReleaseTaskTest {
-
     @Test
     fun createCallbackFromResponse_returnsOnErrorIfNoResponse() {
         val callback: GetLatestReleaseCallback = mockk(relaxed = true)
@@ -27,10 +26,11 @@ internal class GetLatestReleaseTaskTest {
 
     @Test
     fun createCallbackFromResponse_returnsOnErrorOnSadStatusCode() {
-        val mockResponse = mockk<HttpResponse> {
-            every { code } returns 300
-            every { message } returns ""
-        }
+        val mockResponse =
+            mockk<HttpResponse> {
+                every { code } returns 300
+                every { message } returns ""
+            }
         val callback: GetLatestReleaseCallback = mockk(relaxed = true)
         createTask(callback).createCallbackTaskFromResponse(mockResponse).run()
         verify { callback.onError(any()) }
@@ -38,9 +38,10 @@ internal class GetLatestReleaseTaskTest {
 
     @Test
     fun createCallbackFromResponse_returnsUpToDateOn204() {
-        val mockResponse = mockk<HttpResponse> {
-            every { code } returns 204
-        }
+        val mockResponse =
+            mockk<HttpResponse> {
+                every { code } returns 204
+            }
         val callback: GetLatestReleaseCallback = mockk(relaxed = true)
         createTask(callback).createCallbackTaskFromResponse(mockResponse).run()
         verify { callback.onUpToDate() }
@@ -48,10 +49,11 @@ internal class GetLatestReleaseTaskTest {
 
     @Test
     fun createCallbackFromResponse_returnsOtaPackageOnTwoHundred() {
-        val mockResponse = mockk<HttpResponse> {
-            every { code } returns 200
-            every { body } returns RESPONSE.byteInputStream(Charsets.UTF_8) as InputStream
-        }
+        val mockResponse =
+            mockk<HttpResponse> {
+                every { code } returns 200
+                every { body } returns RESPONSE.byteInputStream(Charsets.UTF_8) as InputStream
+            }
         val callback: GetLatestReleaseCallback = mockk(relaxed = true)
         val packageSlot = slot<MemfaultOtaPackage>()
         every { callback.onUpdateAvailable(capture(packageSlot)) } returns Unit
@@ -69,7 +71,8 @@ internal class GetLatestReleaseTaskTest {
         assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
         assertEquals(APP_VERSION, otaPackage.appVersion)
         assertEquals(MD5, otaPackage.md5)
-        assertEquals(emptyMap(), otaPackage.extraInfo)
+        assertEquals(emptyMap(), otaPackage.artifactExtraInfo)
+        assertEquals(emptyMap(), otaPackage.releaseExtraInfo)
     }
 
     @Test
@@ -80,7 +83,8 @@ internal class GetLatestReleaseTaskTest {
         assertEquals(RELEASE_NOTES, otaPackage.releaseNotes)
         assertEquals(APP_VERSION, otaPackage.appVersion)
         assertEquals(MD5, otaPackage.md5)
-        assertEquals(EXTRA_INFO, otaPackage.extraInfo)
+        assertEquals(EXTRA_INFO, otaPackage.artifactExtraInfo)
+        assertEquals(emptyMap(), otaPackage.releaseExtraInfo)
     }
 
     @Test
@@ -94,16 +98,18 @@ internal class GetLatestReleaseTaskTest {
     }
 
     companion object {
-        val LOCATION = """
+        val LOCATION =
+            """
 https://bar.s3.amazonaws.com/foo
 """.replace("\n", "")
         const val RELEASE_NOTES = ""
         const val APP_VERSION = "1.0.0"
         const val MD5 = "43c821cfb039f59aa81078f60885abe4"
-        val EXTRA_INFO = mapOf(
-            "meta" to "data",
-            "meta2" to "data2"
-        )
+        val EXTRA_INFO =
+            mapOf(
+                "meta" to "data",
+                "meta2" to "data2",
+            )
         const val RESPONSE = """
 {
     "artifacts": [
@@ -138,30 +144,33 @@ https://bar.s3.amazonaws.com/foo
 
         private fun addExtraInfo(
             obj: JSONObject,
-            extraInfoMap: Map<String, String> = EXTRA_INFO
+            extraInfoMap: Map<String, String> = EXTRA_INFO,
         ) = obj.apply {
-            val extraInfo = JSONObject().apply {
-                extraInfoMap.forEach { (key, value) -> put(key, value) }
-            }
+            val extraInfo =
+                JSONObject().apply {
+                    extraInfoMap.forEach { (key, value) -> put(key, value) }
+                }
             getJSONArray("artifacts")
                 .getJSONObject(0)
                 .put("extra_info", extraInfo)
         }
     }
 
-    private val device = MemfaultDeviceInfo(
-        deviceSerial = "abc",
-        hardwareVersion = "proto",
-        currentVersion = "1.0.0",
-        softwareType = "main"
-    )
+    private val device =
+        MemfaultDeviceInfo(
+            deviceSerial = "abc",
+            hardwareVersion = "proto",
+            currentVersion = "1.0.0",
+            softwareType = "main",
+        )
 
     private val executor: Executor = Executor { p0 -> p0.run() }
 
-    fun createTask(callback: GetLatestReleaseCallback) = GetLatestReleaseTask(
-        deviceInfo = device,
-        executor = executor,
-        memfaultHttpApi = mockk(),
-        callback = callback
-    )
+    fun createTask(callback: GetLatestReleaseCallback) =
+        GetLatestReleaseTask(
+            deviceInfo = device,
+            executor = executor,
+            memfaultHttpApi = mockk(),
+            callback = callback,
+        )
 }

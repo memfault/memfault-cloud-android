@@ -1,32 +1,34 @@
 package com.memfault.cloud.sdk.internal
 
 import android.net.Uri
+import okio.Buffer
+import okio.buffer
+import okio.sink
 import java.io.Closeable
 import java.io.InputStream
 import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.util.Locale
 import java.util.UUID
-import okio.Buffer
-import okio.buffer
-import okio.sink
 
 private const val TWO_HYPHENS = "--"
 private const val CRLF = "\r\n"
 
 interface RequestBody {
     fun contentType(): String?
+
     fun writeTo(outputStream: OutputStream)
+
     fun contentLength(): Int
 }
 
 data class Part(
-    internal val body: RequestBody
+    internal val body: RequestBody,
 )
 
 data class DataRequestBody(
     internal val byteArray: ByteArray,
-    private val contentType: String? = null
+    private val contentType: String? = null,
 ) : RequestBody {
     override fun contentType(): String? = contentType
 
@@ -42,7 +44,7 @@ data class DataRequestBody(
 
 data class MixedMultipartBody(
     private val parts: List<Part>,
-    private val boundary: String = UUID.randomUUID().toString()
+    private val boundary: String = UUID.randomUUID().toString(),
 ) : RequestBody {
     private val totalContentLength: Int by lazy {
         Buffer().also {
@@ -99,11 +101,9 @@ data class MixedMultipartBody(
 class HttpHeaderMap(private val mixedCaseHeaders: Map<String?, String>) : Map<String?, String> by mixedCaseHeaders {
     private val headersByLowercaseKey by lazy { mixedCaseHeaders.mapKeys { it.key?.lowercase(Locale.ROOT) } }
 
-    override fun containsKey(key: String?) =
-        headersByLowercaseKey.containsKey(key?.lowercase(Locale.ROOT))
+    override fun containsKey(key: String?) = headersByLowercaseKey.containsKey(key?.lowercase(Locale.ROOT))
 
-    override fun get(key: String?): String? =
-        headersByLowercaseKey.get(key?.lowercase(Locale.ROOT))
+    override fun get(key: String?): String? = headersByLowercaseKey.get(key?.lowercase(Locale.ROOT))
 
     override val entries: Set<Map.Entry<String?, String>>
         get() = headersByLowercaseKey.entries
@@ -124,7 +124,7 @@ data class HttpResponse(
     val message: String,
     val body: InputStream,
     val headers: HttpHeaderMap,
-    val connection: CloseableConnection
+    val connection: CloseableConnection,
 ) : Closeable {
     override fun close() {
         try {
@@ -137,13 +137,13 @@ data class HttpResponse(
     }
 }
 
-fun HttpResponse?.isSucessful(): Boolean = if (this == null) false else this.code < 300
+fun HttpResponse?.isSuccessful(): Boolean = if (this == null) false else this.code < 300
 
 internal interface HttpClient {
     fun request(
         method: String,
         uri: Uri,
         headers: Map<String, String>? = null,
-        requestBody: RequestBody? = null
+        requestBody: RequestBody? = null,
     ): HttpResponse?
 }

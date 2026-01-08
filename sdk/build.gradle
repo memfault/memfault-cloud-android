@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka'
 
 android {
+    namespace = "com.memfault.cloud.sdk"
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
-        versionName VERSION_NAME
 
         consumerProguardFiles 'consumer-rules.pro'
 
@@ -17,10 +17,22 @@ android {
         buildConfigField "String", "VERSION_NAME", "\"$VERSION_NAME\""
     }
 
-    lintOptions {
-        checkAllWarnings true
-        warningsAsErrors true
-        abortOnError true
+    buildFeatures {
+        buildConfig = true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs += "-opt-in=kotlin.time.ExperimentalTime"
+        freeCompilerArgs += "-Xjvm-default=all"
+        allWarningsAsErrors = true
+    }
+
+    lint {
+        checkAllWarnings = true
+        warningsAsErrors = true
+        abortOnError = true
     }
 
     buildTypes {
@@ -34,6 +46,11 @@ android {
         unitTests.all {
             useJUnitPlatform()
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -49,23 +66,32 @@ dependencies {
     testImplementation deps.test.mockk
 }
 
-dokka {
-    outputDirectory = "$buildDir/docs"
-    outputFormat = 'html'
-    configuration {
-        includes = ['../README.md', '../LICENSE']
-        reportUndocumented = true
-        includeNonPublic = false
-        perPackageOption {
-            prefix = "com.memfault.cloud.sdk.internal"
-            suppress = true
-        }
-        perPackageOption {
-            prefix = "com.memfault.cloud.sdk.BuildConfig"
-            suppress = true
+def copyDocsTask = tasks.register('copyDocs', Copy) {
+    from "${rootProject.projectDir}/README.md"
+    from "${rootProject.projectDir}/LICENSE"
+    into "$buildDir/docs"
+}
+
+dokkaHtml {
+    outputDirectory.set(file("$buildDir/docs"))
+    dokkaSourceSets {
+        configureEach {
+            reportUndocumented.set(true)
+            includeNonPublic.set(false)
+            perPackageOption {
+                matchingRegex.set("com.memfault.cloud.sdk.internal")
+                suppress.set(true)
+            }
+            perPackageOption {
+                matchingRegex.set("com.memfault.cloud.sdk.BuildConfig")
+                suppress.set(true)
+            }
         }
     }
 
+    finalizedBy {
+        copyDocsTask
+    }
 }
 
 apply from: 'gradle-mvn-push.gradle'
